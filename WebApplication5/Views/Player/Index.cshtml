@@ -1,0 +1,28 @@
+﻿@model IQueryable<WebApplication5.Models.Player>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var player in Model)
+{
+    string positionClass;
+
+    switch (player.Rank)
+    {
+        case 1:
+            positionClass = "gold";
+            break;
+        case 2:
+            positionClass = "silver";
+            break;
+        case 3:
+            positionClass = "bronze";
+            break;
+        default:
+            positionClass = null;
+            break;
+    }
+    <h2 class="@positionClass">@player.Rank. @player.FirstName @player.LastName</h2>
+}

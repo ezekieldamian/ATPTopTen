@@ -1,0 +1,27 @@
+﻿@model WebApplication5.ViewModel.PlayerViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string positionClass;
+
+    switch (Model.Player.Rank)
+    {
+        case 1:
+            positionClass = "gold";
+            break;
+        case 2:
+            positionClass = "silver";
+            break;
+        case 3:
+            positionClass = "bronze";
+            break;
+        default:
+            positionClass = null;
+            break;
+    }
+}
+
+<h2 class="@positionClass">@Model.Player.Rank. @Model.Player.FirstName. @Model.Player.LastName</h2>
