@@ -20,5 +20,7 @@ namespace WebApplication5.Models
         public int Points { get; set; }
 
         public bool IsTie { get; set; }
+
+        public string CareerSummaryHtml { get; set; }
     }
 }

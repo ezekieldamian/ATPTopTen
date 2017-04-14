@@ -228,7 +228,20 @@
     <Compile Include="Migrations\201704130222366_MakeNumberOfWinsNullable.Designer.cs">
       <DependentUpon>201704130222366_MakeNumberOfWinsNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704140558318_AddCarreerSummaryHtmlToPlayer.cs" />
+    <Compile Include="Migrations\201704140558318_AddCarreerSummaryHtmlToPlayer.Designer.cs">
+      <DependentUpon>201704140558318_AddCarreerSummaryHtmlToPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704140600176_PopulateCarreerSummaryHtml.cs" />
+    <Compile Include="Migrations\201704140600176_PopulateCarreerSummaryHtml.Designer.cs">
+      <DependentUpon>201704140600176_PopulateCarreerSummaryHtml.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704140629074_AddCountriesTable.cs" />
+    <Compile Include="Migrations\201704140629074_AddCountriesTable.Designer.cs">
+      <DependentUpon>201704140629074_AddCountriesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\HeadToHead.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -333,6 +346,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704130222366_MakeNumberOfWinsNullable.resx">
       <DependentUpon>201704130222366_MakeNumberOfWinsNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704140558318_AddCarreerSummaryHtmlToPlayer.resx">
+      <DependentUpon>201704140558318_AddCarreerSummaryHtmlToPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704140600176_PopulateCarreerSummaryHtml.resx">
+      <DependentUpon>201704140600176_PopulateCarreerSummaryHtml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704140629074_AddCountriesTable.resx">
+      <DependentUpon>201704140629074_AddCountriesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

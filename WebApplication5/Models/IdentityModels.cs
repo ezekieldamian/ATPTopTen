@@ -24,6 +24,8 @@ namespace WebApplication5.Models
 
         public DbSet<HeadToHead> HeadToHead { get; set; }
 
+        public DbSet<Country> Countries { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
