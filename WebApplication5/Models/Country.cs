@@ -12,7 +12,5 @@ namespace WebApplication5.Models
         public string Name { get; set; }
 
         public string Code { get; set; }
-
-        public string FlagCSS { get; set; }
     }
 }
