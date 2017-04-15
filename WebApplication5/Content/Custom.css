@@ -1,0 +1,18 @@
+﻿.gold {
+    content: url('../Images/Medals/gold.png');
+    height: 40px;
+}
+
+.silver {
+    content: url('../Images/Medals/silver.png');
+    height: 40px;
+}
+
+.bronze {
+    content: url('../Images/Medals/bronze.png');
+    height: 40px;
+}
+
+.inline {
+    display: inline-block;
+}

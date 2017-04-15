@@ -25,5 +25,9 @@
             break;
     }
     var playerName = @player.FirstName + " " + @player.LastName;
-    <h2 class="@positionClass">@player.Rank. @Html.ActionLink(playerName, "ByRank", "Player", new { position = player.Rank }, null)</h2>
+
+    <div>
+        <h2 class="inline">@player.Rank. @Html.ActionLink(playerName, "ByRank", "Player", new { position = player.Rank }, null)</h2>
+        <div class="inline @positionClass"></div>
+    </div>
 }
