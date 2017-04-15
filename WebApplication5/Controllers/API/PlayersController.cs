@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using Newtonsoft.Json;
-using WebApplication5.DataTransferObjects;
 using WebApplication5.Models;
 using WebApplication5.Properties;
 
@@ -29,77 +27,141 @@ namespace WebApplication5.Controllers.API
         }
 
         // GET /api/players
-        public IEnumerable<Player> GetPlayers()
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<Player>))]
+        public IHttpActionResult GetPlayers()
         {
-            return dbContext.Players.ToList();
+            try
+            {
+                return Ok(dbContext.Players.ToList());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET /api/players/1
-        public Player GetPlayer(int rank)
+        [HttpGet]
+        [Route("api/players/{rank}")]
+        public IHttpActionResult GetPlayer(int rank)
         {
-            var player = dbContext.Players.SingleOrDefault(x => x.Rank == rank);
-
-            if (player == null)
+            try
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+                var player = dbContext.Players.SingleOrDefault(x => x.Rank == rank);
 
-            return player;
+                if (player == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(player);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //POST /api/players
         [HttpPost]
-        public Player CreatePlayer(Player player)
+        public IHttpActionResult CreatePlayer(Player player)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                if (player == null)
+                {
+                    return BadRequest("Required parameter Player is null");
+                }
+
+                dbContext.Players.Add(player);
+                dbContext.SaveChanges();
+
+                return Created(new Uri(Request.RequestUri.ToString()), player);
             }
-
-            dbContext.Players.Add(player);
-            dbContext.SaveChanges();
-
-            return player;
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT /api/players/1
         [HttpPut]
-        public void UpdatePlayer(Player player, int rank)
+        [Route("api/players/{rank}")]
+        public IHttpActionResult UpdatePlayer([FromBody]Player player, int rank)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+            
+                if (player == null)
+                {
+                    return BadRequest("Required parameter Player is null");
+                }
+
+                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == player.PlayerId);
+
+                if (playerInDb == null)
+                {
+                    return NotFound();
+                }
+
+                //todo: add automapper to update all properties automatically
+                playerInDb.CareerSummaryHtml = player.CareerSummaryHtml;
+                playerInDb.FirstName = player.FirstName;
+                playerInDb.LastName = player.LastName;
+                playerInDb.IsTie = player.IsTie;
+                playerInDb.NatlCode = player.NatlCode;
+                playerInDb.PlayerId = player.PlayerId;
+                playerInDb.Points = player.Points;
+                playerInDb.Rank = player.Rank;
+
+                dbContext.SaveChanges();
+
+                return Ok(player);
             }
-
-            var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == player.PlayerId);
-
-            if (playerInDb == null)
+            catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return BadRequest(ex.Message);
             }
-
-            playerInDb.Rank = player.Rank;
-            dbContext.SaveChanges();
         }
 
         //DELETE /api/players/1
         [HttpDelete]
-        public void DeletePlayer(int rank)
+        [Route("api/players/{rank}")]
+        public IHttpActionResult DeletePlayer(int rank)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+
+                var playerInDb = dbContext.Players.SingleOrDefault(x => x.Rank == rank);
+
+                if (playerInDb == null)
+                {
+                    return NotFound();
+                }
+
+                dbContext.Players.Remove(playerInDb);
+                dbContext.SaveChanges();
+
+                return Ok();
             }
-
-            var playerInDb = dbContext.Players.SingleOrDefault(x => x.Rank == rank);
-
-            if (playerInDb == null)
+            catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return BadRequest(ex.Message);
             }
-
-            dbContext.Players.Remove(playerInDb);
-            dbContext.SaveChanges();
         }
 
         // GET /api/players/initialData
@@ -109,15 +171,18 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                var players = await GetPlayerDataFromATP();
-
-                return players;
+                return await GetPlayerDataFromATP();
             }
             catch
             {
-                var players = GetPlayerDataFromResource();
-
-                return players;
+                try
+                {
+                    return GetPlayerDataFromResource();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while getting player data from resource.", ex);
+                }
             }
         }
 

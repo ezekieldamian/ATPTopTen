@@ -20,9 +20,9 @@ namespace WebApplication5.Migrations
 
             var api = new PlayersController();
 
-            var players = api.GetInitialPlayersData();
+            var players = api.GetInitialPlayersData().Result;
 
-            foreach (var player in players.Result.ToList())
+            foreach (var player in players.ToList())
             {
                 var sqlCommand = "INSERT into Players VALUES (";
 

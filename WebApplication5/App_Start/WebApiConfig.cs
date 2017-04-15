@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace WebApplication5
 {
@@ -19,10 +21,16 @@ namespace WebApplication5
             //configuration.Formatters.JsonFormatter
             //    .SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
+            //remove XML as supported media type
             var appXmlType = configuration.Formatters.XmlFormatter
                 .SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
-
             configuration.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+
+            //change JSON to camel case indented (to consume with Javascript)
+            var jsonSettings = configuration.Formatters.JsonFormatter.SerializerSettings;
+            jsonSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonSettings.Formatting = Formatting.Indented;
+
         }
     }
 }
