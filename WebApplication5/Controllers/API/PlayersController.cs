@@ -44,10 +44,32 @@ namespace WebApplication5.Controllers.API
             }
         }
 
+        // GET /api/players/ABCD
+        [HttpGet]
+        [Route("api/players/{playerId}")]
+        public IHttpActionResult GetPlayerByPlayerId(string playerId)
+        {
+            try
+            {
+                var player = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerId);
+
+                if (player == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(Mapper.Map<Player, PlayerDto>(player));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
+            }
+        }
+
         // GET /api/players/1
         [HttpGet]
-        [Route("api/players/{rank}")]
-        public IHttpActionResult GetPlayer(int rank)
+        [Route("api/players/rank/{rank}")]
+        public IHttpActionResult GetPlayerByRank(int rank)
         {
             try
             {
@@ -95,10 +117,10 @@ namespace WebApplication5.Controllers.API
             }
         }
 
-        // PUT /api/players/1
+        // PUT /api/players/ABCD
         [HttpPut]
-        [Route("api/players/{rank}")]
-        public IHttpActionResult UpdatePlayer([FromBody]PlayerDto playerDto, int rank)
+        [Route("api/players/{playerId}")]
+        public IHttpActionResult UpdatePlayer([FromBody]PlayerDto playerDto, string playerId)
         {
             try
             {
@@ -112,7 +134,7 @@ namespace WebApplication5.Controllers.API
                     return BadRequest("Required parameter Player is null");
                 }
 
-                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerDto.PlayerId);
+                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerId);
 
                 if (playerInDb == null)
                 {
@@ -132,10 +154,10 @@ namespace WebApplication5.Controllers.API
             }
         }
 
-        //DELETE /api/players/1
+        //DELETE /api/players/ABCD
         [HttpDelete]
-        [Route("api/players/{rank}")]
-        public IHttpActionResult DeletePlayer(int rank)
+        [Route("api/players/{playerId}")]
+        public IHttpActionResult DeletePlayer(string playerId)
         {
             try
             {
@@ -144,7 +166,7 @@ namespace WebApplication5.Controllers.API
                     return BadRequest();
                 }
 
-                var playerInDb = dbContext.Players.SingleOrDefault(x => x.Rank == rank);
+                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerId);
 
                 if (playerInDb == null)
                 {
