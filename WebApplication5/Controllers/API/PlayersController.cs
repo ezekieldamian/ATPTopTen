@@ -1,18 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
+using WebApplication5.DataTransferObjects;
 using WebApplication5.Models;
+using WebApplication5.Properties;
 
 namespace WebApplication5.Controllers.API
 {
     public class PlayersController : ApiController
     {
-        private ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext dbContext;
 
         public PlayersController()
         {
@@ -101,16 +105,37 @@ namespace WebApplication5.Controllers.API
         // GET /api/players/initialData
         [HttpGet]
         [Route("api/players/initialData")]
-        public IEnumerable<Player> GetInitialPlayersData()
+        public async Task<IEnumerable<Player>> GetInitialPlayersData()
         {
-            var players = GetDataFromATP();
+            try
+            {
+                var players = await GetPlayerDataFromATP();
 
-            return players.Result;
+                return players;
+            }
+            catch
+            {
+                var players = GetPlayerDataFromResource();
+
+                return players;
+            }
+        }
+
+        private static IEnumerable<Player> GetPlayerDataFromResource()
+        {
+            var players = Resources.PlayersJsonString;
+            var resultObjects = JsonConvert.DeserializeObject<IEnumerable<Player>>(players);
+
+            return resultObjects;
         }
 
         //todo: refactor this
-        private async Task<IEnumerable<Player>> GetDataFromATP()
+        // ReSharper disable once InconsistentNaming
+        private static async Task<IEnumerable<Player>> GetPlayerDataFromATP()
         {
+            //testing
+            //throw new Exception("Service Down");
+
             var apiBaseAddress = ConfigurationManager.AppSettings["ServiceUrl"];
             var apiKey = ConfigurationManager.AppSettings["Key"];
 

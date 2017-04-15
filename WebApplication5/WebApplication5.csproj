@@ -209,7 +209,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\API\PlayersController.cs" />
-    <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="DataTransferObjects\PlayerDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -265,6 +264,11 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -297,7 +301,9 @@
     <Content Include="Images\Medals\bronze.png" />
     <Content Include="Images\Medals\gold.png" />
     <Content Include="Images\Medals\silver.png" />
-    <Content Include="players.txt" />
+    <Content Include="players.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="readme.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -403,6 +409,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704150928258_MakeCountryCodePrimaryKey.resx">
       <DependentUpon>201704150928258_MakeCountryCodePrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

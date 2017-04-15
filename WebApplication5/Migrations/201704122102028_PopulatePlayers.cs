@@ -22,7 +22,7 @@ namespace WebApplication5.Migrations
 
             var players = api.GetInitialPlayersData();
 
-            foreach (var player in players.ToList())
+            foreach (var player in players.Result.ToList())
             {
                 var sqlCommand = "INSERT into Players VALUES (";
 

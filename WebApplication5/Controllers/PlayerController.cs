@@ -11,7 +11,7 @@ namespace WebApplication5.Controllers
 {
     public class PlayerController : Controller
     {
-        private ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext dbContext;
 
         public PlayerController()
         {
