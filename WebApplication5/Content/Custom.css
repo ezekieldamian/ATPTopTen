@@ -16,3 +16,7 @@
 .inline {
     display: inline-block;
 }
+
+.black_border {
+    border: 1px black solid;
+}

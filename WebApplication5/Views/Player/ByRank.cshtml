@@ -27,4 +27,5 @@
 
 <h2 class="inline">@Model.Player.Rank. @Model.Player.FirstName @Model.Player.LastName</h2>
 <div class="inline @positionClass"></div>
-<img class="inline" width="50px" src="~/Images/Countries/@(Model.Player.NatlCode).svg" alt="">
+<img class="inline black_border" width="50px" src="~/Images/Countries/@(Model.Player.NatlCode).svg" alt="">
+<p>@(Html.Raw(HttpUtility.HtmlDecode(Model.Player.CareerSummaryHtml)))</p>

@@ -20,5 +20,6 @@ namespace WebApplication5.DataTransferObjects
         public int Points { get; set; }
 
         public bool IsTie { get; set; }
+        public string CareerSummaryHtml { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
 
 namespace WebApplication5
 {
@@ -12,6 +13,7 @@ namespace WebApplication5
         {
             AreaRegistration.RegisterAllAreas();
 
+            Mapper.Initialize(x => x.AddProfile<MappingProfile>());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             //WebApiConfig.Register(GlobalConfiguration.Configuration);

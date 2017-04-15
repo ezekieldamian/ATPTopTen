@@ -6,7 +6,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using AutoMapper;
 using Newtonsoft.Json;
+using WebApplication5.DataTransferObjects;
+using WebApplication5.HelperClasses;
 using WebApplication5.Models;
 using WebApplication5.Properties;
 
@@ -28,16 +31,16 @@ namespace WebApplication5.Controllers.API
 
         // GET /api/players
         [HttpGet]
-        [ResponseType(typeof(IEnumerable<Player>))]
+        [ResponseType(typeof(IEnumerable<PlayerDto>))]
         public IHttpActionResult GetPlayers()
         {
             try
             {
-                return Ok(dbContext.Players.ToList());
+                return Ok(dbContext.Players.ToList().Select(Mapper.Map<Player, PlayerDto>));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
@@ -55,17 +58,17 @@ namespace WebApplication5.Controllers.API
                     return NotFound();
                 }
 
-                return Ok(player);
+                return Ok(Mapper.Map<Player, PlayerDto>(player));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
         //POST /api/players
         [HttpPost]
-        public IHttpActionResult CreatePlayer(Player player)
+        public IHttpActionResult CreatePlayer(PlayerDto playerDto)
         {
             try
             {
@@ -74,26 +77,28 @@ namespace WebApplication5.Controllers.API
                     return BadRequest();
                 }
 
-                if (player == null)
+                if (playerDto == null)
                 {
                     return BadRequest("Required parameter Player is null");
                 }
 
+                var player = Mapper.Map<PlayerDto, Player>(playerDto);
+
                 dbContext.Players.Add(player);
                 dbContext.SaveChanges();
 
-                return Created(new Uri(Request.RequestUri.ToString()), player);
+                return Created(new Uri(Request.RequestUri.ToString()), playerDto);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
         // PUT /api/players/1
         [HttpPut]
         [Route("api/players/{rank}")]
-        public IHttpActionResult UpdatePlayer([FromBody]Player player, int rank)
+        public IHttpActionResult UpdatePlayer([FromBody]PlayerDto playerDto, int rank)
         {
             try
             {
@@ -101,36 +106,29 @@ namespace WebApplication5.Controllers.API
                 {
                     return BadRequest();
                 }
-            
-                if (player == null)
+
+                if (playerDto == null)
                 {
                     return BadRequest("Required parameter Player is null");
                 }
 
-                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == player.PlayerId);
+                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerDto.PlayerId);
 
                 if (playerInDb == null)
                 {
                     return NotFound();
                 }
 
-                //todo: add automapper to update all properties automatically
-                playerInDb.CareerSummaryHtml = player.CareerSummaryHtml;
-                playerInDb.FirstName = player.FirstName;
-                playerInDb.LastName = player.LastName;
-                playerInDb.IsTie = player.IsTie;
-                playerInDb.NatlCode = player.NatlCode;
-                playerInDb.PlayerId = player.PlayerId;
-                playerInDb.Points = player.Points;
-                playerInDb.Rank = player.Rank;
+                //update all fields with automapper
+                Mapper.Map(playerDto, playerInDb);
 
                 dbContext.SaveChanges();
 
-                return Ok(player);
+                return Ok(playerDto);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
@@ -160,7 +158,7 @@ namespace WebApplication5.Controllers.API
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
@@ -216,6 +214,5 @@ namespace WebApplication5.Controllers.API
 
             return resultObjects;
         }
-
     }
 }
