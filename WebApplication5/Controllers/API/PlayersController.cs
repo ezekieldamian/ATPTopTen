@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using Newtonsoft.Json;
 using WebApplication5.Models;
 
 namespace WebApplication5.Controllers.API
@@ -93,5 +97,35 @@ namespace WebApplication5.Controllers.API
             dbContext.Players.Remove(playerInDb);
             dbContext.SaveChanges();
         }
+
+        // GET /api/players/initialData
+        [HttpGet]
+        [Route("api/players/initialData")]
+        public IEnumerable<Player> GetInitialPlayersData()
+        {
+            var players = GetDataFromATP();
+
+            return players.Result;
+        }
+
+        //todo: refactor this
+        private async Task<IEnumerable<Player>> GetDataFromATP()
+        {
+            var apiBaseAddress = ConfigurationManager.AppSettings["ServiceUrl"];
+            var apiKey = ConfigurationManager.AppSettings["Key"];
+
+            var fullUri = apiBaseAddress + "Token/Rankings" + "?token=" + apiKey;
+
+            var client = new HttpClient();
+
+            var response = await client.GetAsync(fullUri);
+
+            var jsonResult = response.Content.ReadAsStringAsync().Result;
+
+            var resultObjects = JsonConvert.DeserializeObject<IEnumerable<Player>>(jsonResult);
+
+            return resultObjects;
+        }
+
     }
 }

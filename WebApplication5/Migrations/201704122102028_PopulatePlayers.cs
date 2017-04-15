@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using WebApplication5.Controllers.API;
 using WebApplication5.Models;
 
 namespace WebApplication5.Migrations
@@ -17,9 +18,11 @@ namespace WebApplication5.Migrations
         {
             Sql("Delete from players");
 
-            var players = GetData();
+            var api = new PlayersController();
 
-            foreach (var player in players.Result.ToList())
+            var players = api.GetInitialPlayersData();
+
+            foreach (var player in players.ToList())
             {
                 var sqlCommand = "INSERT into Players VALUES (";
 
@@ -38,24 +41,6 @@ namespace WebApplication5.Migrations
         public override void Down()
         {
             Sql("Delete from players");
-        }
-
-        private async Task<IEnumerable<Player>> GetData()
-        {
-            var apiBaseAddress = ConfigurationManager.AppSettings["ServiceUrl"];
-            var apiKey = ConfigurationManager.AppSettings["Key"];
-
-            var fullUri = apiBaseAddress + "Token/Rankings" + "?token=" + apiKey;
-
-            var client = new HttpClient();
-
-            var response = await client.GetAsync(fullUri);
-
-            var jsonResult = response.Content.ReadAsStringAsync().Result;
-
-            var resultObjects = JsonConvert.DeserializeObject<IEnumerable<Player>>(jsonResult);
-
-            return resultObjects;
         }
     }
 }

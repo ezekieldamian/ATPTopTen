@@ -12,7 +12,7 @@ namespace WebApplication5.Migrations
         
         public override void Down()
         {
-            AlterColumn("dbo.HeadToHeads", "NumberOfWins", c => c.Int(nullable: false));
+            AlterColumn("dbo.HeadToHeads", "NumberOfWins", c => c.Int(nullable: true));
         }
     }
 }

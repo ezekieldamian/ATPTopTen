@@ -15,7 +15,10 @@ namespace WebApplication5.Migrations
             Sql("INSERT into Countries (Name, Code) VALUES ('Japan', 'JPN')");
             Sql("INSERT into Countries (Name, Code) VALUES ('Canada', 'CAN')");
             Sql("INSERT into Countries (Name, Code) VALUES ('France', 'FRA')");
-            Sql("INSERT into Countries (Name, Code) VALUES ('Austria', 'AUT')");            
+            Sql("INSERT into Countries (Name, Code) VALUES ('Austria', 'AUT')");
+            Sql("INSERT into Countries (Name, Code) VALUES ('Argentina', 'ARG')");
+            Sql("INSERT into Countries (Name, Code) VALUES ('Uruguay', 'URU')");
+            Sql("INSERT into Countries (Name, Code) VALUES ('United States', 'USA')");
         }
 
         public override void Down()

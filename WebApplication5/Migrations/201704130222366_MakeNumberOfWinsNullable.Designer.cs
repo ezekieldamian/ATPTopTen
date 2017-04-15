@@ -13,7 +13,7 @@ namespace WebApplication5.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704130222366_testing"; }
+            get { return "201704130222366_MakeNumberOfWinsNullable"; }
         }
         
         string IMigrationMetadata.Source
