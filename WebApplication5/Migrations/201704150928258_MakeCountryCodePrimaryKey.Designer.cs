@@ -7,13 +7,13 @@ namespace WebApplication5.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class PopulateCarreerSummaryHtml : IMigrationMetadata
+    public sealed partial class MakeCountryCodePrimaryKey : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateCarreerSummaryHtml));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MakeCountryCodePrimaryKey));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704140600176_PopulateCarreerSummaryHtml"; }
+            get { return "201704150928258_MakeCountryCodePrimaryKey"; }
         }
         
         string IMigrationMetadata.Source

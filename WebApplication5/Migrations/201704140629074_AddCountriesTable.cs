@@ -8,18 +8,18 @@ namespace WebApplication5.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Countries",
-                c => new
+                    "dbo.Countries",
+                    c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
                         Code = c.String(),
+                        Name = c.String(),
                         FlagCSS = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
         }
-        
+
         public override void Down()
         {
             DropTable("dbo.Countries");

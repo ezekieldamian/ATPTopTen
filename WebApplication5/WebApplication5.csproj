@@ -239,9 +239,9 @@
     <Compile Include="Migrations\201704140558318_AddCarreerSummaryHtmlToPlayer.Designer.cs">
       <DependentUpon>201704140558318_AddCarreerSummaryHtmlToPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704140600176_PopulateCarreerSummaryHtml.cs" />
-    <Compile Include="Migrations\201704140600176_PopulateCarreerSummaryHtml.Designer.cs">
-      <DependentUpon>201704140600176_PopulateCarreerSummaryHtml.cs</DependentUpon>
+    <Compile Include="Migrations\201704140600176_PopulateCareerSummaryHtml.cs" />
+    <Compile Include="Migrations\201704140600176_PopulateCareerSummaryHtml.Designer.cs">
+      <DependentUpon>201704140600176_PopulateCareerSummaryHtml.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201704140629074_AddCountriesTable.cs" />
     <Compile Include="Migrations\201704140629074_AddCountriesTable.Designer.cs">
@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201704140715178_DeleteFlagCssFromCountry.cs" />
     <Compile Include="Migrations\201704140715178_DeleteFlagCssFromCountry.Designer.cs">
       <DependentUpon>201704140715178_DeleteFlagCssFromCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704150928258_MakeCountryCodePrimaryKey.cs" />
+    <Compile Include="Migrations\201704150928258_MakeCountryCodePrimaryKey.Designer.cs">
+      <DependentUpon>201704150928258_MakeCountryCodePrimaryKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Country.cs" />
@@ -385,8 +389,8 @@
     <EmbeddedResource Include="Migrations\201704140558318_AddCarreerSummaryHtmlToPlayer.resx">
       <DependentUpon>201704140558318_AddCarreerSummaryHtmlToPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704140600176_PopulateCarreerSummaryHtml.resx">
-      <DependentUpon>201704140600176_PopulateCarreerSummaryHtml.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704140600176_PopulateCareerSummaryHtml.resx">
+      <DependentUpon>201704140600176_PopulateCareerSummaryHtml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704140629074_AddCountriesTable.resx">
       <DependentUpon>201704140629074_AddCountriesTable.cs</DependentUpon>
@@ -396,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704140715178_DeleteFlagCssFromCountry.resx">
       <DependentUpon>201704140715178_DeleteFlagCssFromCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704150928258_MakeCountryCodePrimaryKey.resx">
+      <DependentUpon>201704150928258_MakeCountryCodePrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
