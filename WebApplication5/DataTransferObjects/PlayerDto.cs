@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using WebApplication5.Models;
 
 namespace WebApplication5.DataTransferObjects
 {
@@ -12,9 +14,6 @@ namespace WebApplication5.DataTransferObjects
 
         public string LastName { get; set; }
 
-        [Obsolete]
-        public string NatlCode { get; set; }
-
         public int Points { get; set; }
 
         public bool IsTie { get; set; }
@@ -23,5 +22,7 @@ namespace WebApplication5.DataTransferObjects
         public int? CountryId { get; set; }
 
         public CountryDto Country { get; set; }
+
+        public IEnumerable<HeadToHeadDto> HeadToHeads { get; set; }
     }
 }

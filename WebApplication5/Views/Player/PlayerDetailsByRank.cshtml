@@ -79,7 +79,7 @@
         @{
             if (Model.Player.Rank > 1)
             {
-                @Html.ActionLink("< Previous", "PlayerDetailsByRank", "Player", new { position = Model.Player.Rank - 1 }, null)
+                @Html.ActionLink("< Previous", "PlayerDetailsByRank", "Player", new { rank = Model.Player.Rank - 1 }, null)
             }
             else
             {
@@ -91,7 +91,7 @@
         @{
             if (Model.Player.Rank < 10)
             {
-                @Html.ActionLink("Next >", "PlayerDetailsByRank", "Player", new { position = Model.Player.Rank + 1 }, null)
+                @Html.ActionLink("Next >", "PlayerDetailsByRank", "Player", new { rank = Model.Player.Rank + 1 }, null)
             }
             else
             {

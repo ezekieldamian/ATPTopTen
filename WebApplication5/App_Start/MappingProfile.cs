@@ -11,6 +11,7 @@ namespace WebApplication5
             Mapper.CreateMap<Player, PlayerDto>();
             Mapper.CreateMap<PlayerDto, Player>();
             Mapper.CreateMap<Country, CountryDto>();
+            Mapper.CreateMap<HeadToHead, HeadToHeadDto>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ using WebApplication5.DataTransferObjects;
 using WebApplication5.HelperClasses;
 using WebApplication5.Models;
 using WebApplication5.Properties;
-using System.Data.Entity;
 
 namespace WebApplication5.Controllers.API
 {
@@ -22,14 +22,20 @@ namespace WebApplication5.Controllers.API
 
         public PlayersController()
         {
+            //todo: dependency injection!!
             dbContext = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
         {
+            //dispose dbcontext appropriately
             dbContext.Dispose();
         }
 
+        /// <summary>
+        /// GET ATP Top Ten players.
+        /// </summary>
+        /// <returns></returns>
         // GET /api/players
         [HttpGet]
         [ResponseType(typeof(IEnumerable<PlayerDto>))]
@@ -37,15 +43,33 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                return Ok(dbContext.Players.Include(x=>x.Country)
-                    .ToList().Select(Mapper.Map<Player, PlayerDto>));
+                //get player data and eager load country too!!
+                var players = dbContext.Players
+                    .Include(x => x.Country).ToList();
+
+                foreach (var player in players)
+                {
+                    //load head to heads
+                    player.HeadToHeads =
+                        dbContext.HeadToHead.Where(x => x.WinnerId == player.PlayerId).ToList();
+                }
+
+                //convert to dto and return
+                return Ok(players.Select(Mapper.Map<Player, PlayerDto>));
             }
             catch (Exception ex)
             {
+                //return innermost exception if any
                 return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
+        /// <summary>
+        /// Get ATP Top Ten Player by Player Id.
+        /// Player Id is a string and it's the player's unique identifier.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
         // GET /api/players/ABCD
         [HttpGet]
         [Route("api/players/{playerId}")]
@@ -53,22 +77,36 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                var player = dbContext.Players.Include(x => x.Country)
+                //get player data and eager load country too
+                var player = dbContext.Players
+                    .Include(x => x.Country)
                     .SingleOrDefault(x => x.PlayerId == playerId);
 
+                //return if not found
                 if (player == null)
                 {
                     return NotFound();
                 }
 
+                //get head to head data
+                player.HeadToHeads =
+                    dbContext.HeadToHead.Where(x => x.WinnerId == player.PlayerId).ToList();
+
+                //convert to dto and return
                 return Ok(Mapper.Map<Player, PlayerDto>(player));
             }
             catch (Exception ex)
             {
+                //return innermost exception if any
                 return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
+        /// <summary>
+        /// Get ATP Top Ten Player by Rank
+        /// </summary>
+        /// <param name="rank"></param>
+        /// <returns></returns>
         // GET /api/players/1
         [HttpGet]
         [Route("api/players/rank/{rank}")]
@@ -76,51 +114,77 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                var player = dbContext.Players.Include(x => x.Country)
+                //get player data and country
+                var player = dbContext.Players
+                    .Include(x => x.Country)
                     .SingleOrDefault(x => x.Rank == rank);
 
+                //return if not found
                 if (player == null)
                 {
                     return NotFound();
                 }
 
+                //get head to head data
+                player.HeadToHeads =
+                    dbContext.HeadToHead.Where(x => x.WinnerId == player.PlayerId).ToList();
+
+                //convert to dto and return
                 return Ok(Mapper.Map<Player, PlayerDto>(player));
             }
             catch (Exception ex)
             {
+                //return innermost exception if any
                 return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
+        /// <summary>
+        /// Insert an ATP Top Ten player to the list.
+        /// </summary>
+        /// <param name="playerDto"></param>
+        /// <returns></returns>
         //POST /api/players
         [HttpPost]
         public IHttpActionResult CreatePlayer(PlayerDto playerDto)
         {
             try
             {
+                //return if not valid request
                 if (!ModelState.IsValid)
                 {
                     return BadRequest();
                 }
 
+                //return if player is null
                 if (playerDto == null)
                 {
                     return BadRequest("Required parameter Player is null");
                 }
 
+                //convert dto into player
                 var player = Mapper.Map<PlayerDto, Player>(playerDto);
 
+                //add to local db and save changes
                 dbContext.Players.Add(player);
                 dbContext.SaveChanges();
 
+                //return created object
                 return Created(new Uri(Request.RequestUri.ToString()), playerDto);
             }
             catch (Exception ex)
             {
+                //return innermost exception if any
                 return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
+        /// <summary>
+        /// Update ATP Top Ten Player info.
+        /// </summary>
+        /// <param name="playerDto"></param>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
         // PUT /api/players/ABCD
         [HttpPut]
         [Route("api/players/{playerId}")]
@@ -128,19 +192,24 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
+                //return if bad request
                 if (!ModelState.IsValid)
                 {
                     return BadRequest();
                 }
 
+                //return if player is null
                 if (playerDto == null)
                 {
                     return BadRequest("Required parameter Player is null");
                 }
 
+                //get player and country info
                 var playerInDb = dbContext.Players.Include(x => x.Country)
                     .SingleOrDefault(x => x.PlayerId == playerId);
 
+                //todo: create if not found?
+                //return if no player found
                 if (playerInDb == null)
                 {
                     return NotFound();
@@ -149,16 +218,24 @@ namespace WebApplication5.Controllers.API
                 //update all fields with automapper
                 Mapper.Map(playerDto, playerInDb);
 
+                //save to db
                 dbContext.SaveChanges();
 
+                //return updated dto
                 return Ok(playerDto);
             }
             catch (Exception ex)
             {
+                //return innermost exception if any
                 return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
+        /// <summary>
+        /// Delete ATP Top Ten player from the list
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
         //DELETE /api/players/ABCD
         [HttpDelete]
         [Route("api/players/{playerId}")]
@@ -166,29 +243,40 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
+                //return if not valid state
                 if (!ModelState.IsValid)
                 {
                     return BadRequest();
                 }
 
+                //get player record in db
                 var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerId);
 
+                //return if not found
                 if (playerInDb == null)
                 {
                     return NotFound();
                 }
 
+                //remove from db and save changes
                 dbContext.Players.Remove(playerInDb);
                 dbContext.SaveChanges();
 
+                //return ok if no errors
                 return Ok();
             }
             catch (Exception ex)
             {
+                //return innermost exception if any
                 return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
             }
         }
 
+        /// <summary>
+        /// Get initial ATP Top Ten player info to insert in database.
+        /// If ATP service is down, get saved data in resources.
+        /// </summary>
+        /// <returns></returns>
         // GET /api/players/initialData
         [HttpGet]
         [Route("api/players/initialData")]
@@ -196,12 +284,14 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
+                //try to get player data from ATP web service
                 return await GetPlayerDataFromATP();
             }
             catch
             {
                 try
                 {
+                    //if failed, read from saved resource
                     return GetPlayerDataFromResource();
                 }
                 catch (Exception ex)
@@ -211,6 +301,10 @@ namespace WebApplication5.Controllers.API
             }
         }
 
+        /// <summary>
+        /// Get JSON player data from resource (to be used only if ATP service is down).
+        /// </summary>
+        /// <returns></returns>
         private static IEnumerable<Player> GetPlayerDataFromResource()
         {
             var players = Resources.PlayersJsonString;
@@ -219,10 +313,15 @@ namespace WebApplication5.Controllers.API
             return resultObjects;
         }
 
-        //todo: refactor this
+        /// <summary>
+        /// Read player data from ATP web service.
+        /// </summary>
+        /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         private static async Task<IEnumerable<Player>> GetPlayerDataFromATP()
         {
+            //todo: refactor this (move to logic layer)
+
             //testing
             //throw new Exception("Service Down");
 
@@ -236,7 +335,7 @@ namespace WebApplication5.Controllers.API
             var response = await client.GetAsync(fullUri);
 
             var jsonResult = response.Content.ReadAsStringAsync().Result;
-            
+
             var resultObjects = JsonConvert.DeserializeObject<IEnumerable<Player>>(jsonResult);
 
             return resultObjects;

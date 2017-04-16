@@ -12,7 +12,7 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("My Favorites", "Index", "Favorites")</li>
                 <li>@Html.ActionLink("Head To Head", "Index", "HeadToHead")</li>
-                <li>@Html.ActionLink("Biographies", "PlayerDetailsByRank", "Player", new { position = 1 }, null )</li>
+                <li>@Html.ActionLink("Biographies", "PlayerDetailsByRank", "Player", new { rank = 1 }, null)</li>
             </ul>
             @*@Html.Partial("_LoginPartial")*@
         </div>

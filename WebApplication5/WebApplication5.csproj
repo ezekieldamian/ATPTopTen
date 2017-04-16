@@ -215,6 +215,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\API\PlayersController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="DataTransferObjects\HeadToHeadDto.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="DataTransferObjects\CountryDto.cs" />
     <Compile Include="DataTransferObjects\PlayerDto.cs" />
@@ -297,6 +298,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\atp_logo.jpg" />
+    <Content Include="Images\atp_masters_logo.png" />
     <Content Include="Images\Countries\ARG.svg" />
     <Content Include="Images\Countries\AUT.svg" />
     <Content Include="Images\Countries\CAN.svg" />

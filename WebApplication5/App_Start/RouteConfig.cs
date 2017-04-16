@@ -11,12 +11,6 @@ namespace WebApplication5
 
             routes.MapMvcAttributeRoutes();
 
-            //routes.MapRoute("PlayersByRank",
-            //    "player/rank/{position}",
-            //    new { controller = "Player", action = "ByRank" },
-            //    new { position = @"\d{1,2}" }
-            //    );
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
