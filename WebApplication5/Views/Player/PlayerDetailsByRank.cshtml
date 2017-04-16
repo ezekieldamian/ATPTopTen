@@ -1,8 +1,14 @@
-﻿@model WebApplication5.ViewModel.PlayerViewModel
+﻿@using Microsoft.Ajax.Utilities
+@model WebApplication5.ViewModel.PlayerViewModel
+
+@functions {
+    public string PlayerFullName { get; set; }
+}
 
 @{
     ViewBag.Title = "Player Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    PlayerFullName = Model.Player.FirstName + " " + Model.Player.LastName;
 }
 @{
     string positionClass;
@@ -10,22 +16,87 @@
     switch (Model.Player.Rank)
     {
         case 1:
-            positionClass = "gold";
+            positionClass = "medium-size gold";
             break;
         case 2:
-            positionClass = "silver";
+            positionClass = "medium-size silver";
             break;
         case 3:
-            positionClass = "bronze";
+            positionClass = "medium-size bronze";
             break;
         default:
             positionClass = null;
             break;
     }
-
 }
-<h1>@ViewBag.Title</h1>
-<h2 class="inline">@Model.Player.Rank. @Model.Player.FirstName @Model.Player.LastName</h2>
-<div class="inline @positionClass"></div>
-<img class="inline black_border" width="50px" src="~/Images/Countries/@(Model.Player.NatlCode).svg" alt="">
-<p>@(Html.Raw(HttpUtility.HtmlDecode(Model.Player.CareerSummaryHtml)))</p>
+<div id="details-container">
+    <h1>@PlayerFullName<span class="@positionClass"></span></h1>
+    <div id="header-details">
+        <div class="inline">
+            <div id="ranking">
+                <h3>Ranking: @Model.Player.Rank</h3>
+            </div>
+            <div id="country">
+                <h3>Nationality: <img class="inline black_border flag" src="~/Images/Countries/@(Model.Player.NatlCode).svg" alt="@Model.Player.NatlCode"></h3>
+            </div>
+        </div>
+        @{
+            var profileImagePath = "~/Images/Players/" + Model.Player.LastName + "1.jpg";
+            if (File.Exists(Server.MapPath(profileImagePath)))
+            {
+                <div id="profile-image" class="inline">
+                    <img class="profilePicture" src="~/Images/Players/@(Model.Player.LastName)1.jpg" alt="@PlayerFullName" />
+                </div>
+            }
+        }
+    </div>
+    @{
+        if (!Model.Player.CareerSummaryHtml.IsNullOrWhiteSpace())
+        {
+            <div id="details-biography">
+                <h2 class="bold">Career Summary:</h2>
+                <p>
+                    @(Html.Raw(HttpUtility.HtmlDecode(Model.Player.CareerSummaryHtml
+                          .Replace("<p>&gt; ", "<ul><li>").Replace("&gt;", "<li>"))))
+                </p>
+            </div>
+        }
+    }
+    @{
+        var imagePath = "~/Images/Players/" + Model.Player.LastName + "2.jpg";
+        if (File.Exists(Server.MapPath(imagePath)))
+        {
+            <div id="details-picture">
+                <p>
+                    <img class="fullPicture" src="~/Images/Players/@(Model.Player.LastName)2.jpg" alt="@PlayerFullName" />
+                </p>
+            </div>
+        }
+    }
+</div>
+<div>
+    <div id="previous-button" class="btn btn-primary">
+        @{
+            if (Model.Player.Rank > 1)
+            {
+                @Html.ActionLink("< Previous", "PlayerDetailsByRank", "Player", new { position = Model.Player.Rank - 1 }, null)
+            }
+            else
+            {
+                @Html.ActionLink("< Back to top ten", "TopTenList", "Player", null, null)
+            }
+        }
+    </div>
+    <div id="next-button" class="btn btn-primary">
+        @{
+            if (Model.Player.Rank < 10)
+            {
+                @Html.ActionLink("Next >", "PlayerDetailsByRank", "Player", new { position = Model.Player.Rank + 1 }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Go to Top Ten >", "TopTenList", "Player", null, null)
+            }
+        }
+    </div>
+</div>

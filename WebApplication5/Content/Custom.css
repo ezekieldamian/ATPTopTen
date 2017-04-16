@@ -1,16 +1,81 @@
-﻿.gold {
-    content: url('../Images/Medals/gold.png');
-    height: 40px;
+﻿body, html {
+    background-color: transparent;
+    color: black;
+    font-size: 100%;
+    color: lightgrey;
+}
+
+.navbar {
+    background-color: #333;
+    border: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #CCC;
+}
+
+.navbar-inverse .navbar-header a:hover {
+    color: #CCC;
+}
+
+a {
+    color: lightgrey;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #AAAAAA;
+        text-decoration: none;
+    }
+
+.body-content {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+    font-size: 45px;
+    font-weight: bold;
+    color: lightgrey;
+}
+
+h2 {
+    color: lightgrey;
+    font-size: 24px;
+}
+
+h3 {
+    color: lightgrey;
+}
+
+h4 {
+    color: lightgrey;
+}
+
+p {
+    font-size: 16px;
+    font-weight: lighter;
+    color: lightgrey;
+}
+
+.medium-size {
+    height: 50px;
+}
+
+.small-size {
+    height: 25px;
+}
+
+.gold {
+    content: url('../Images/Medals/gold-transparent-bg.png');
 }
 
 .silver {
-    content: url('../Images/Medals/silver.png');
-    height: 40px;
+    content: url('../Images/Medals/silver-transparent-bg.png');
 }
 
 .bronze {
-    content: url('../Images/Medals/bronze.png');
-    height: 40px;
+    content: url('../Images/Medals/bronze-transparent-bg.png');
 }
 
 .inline {
@@ -19,4 +84,55 @@
 
 .black_border {
     border: 1px black solid;
+}
+
+.profilePicture {
+    width: 400px;
+}
+
+.fullPicture {
+    width: 100%;
+    max-width: 800px;
+}
+
+.flag {
+    width: 50px;
+}
+
+html {
+    background: url("../Images/Venues/tenniscourt1.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+p li{
+  margin: 10px 0;
+}
+
+#country {
+    width: 400px;
+}
+
+#header-details {
+    width: 100%;
+}
+
+#profile-image {
+    float: right;
+    margin: 0 0 20px 20px;
+}
+
+#details-picture {
+    text-align: center;
+    margin: 40px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#next-button {
+    float: right;
 }

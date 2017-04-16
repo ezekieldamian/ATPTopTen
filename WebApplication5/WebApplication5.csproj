@@ -304,9 +304,37 @@
     <Content Include="Images\Countries\SUI.svg" />
     <Content Include="Images\Countries\URU.svg" />
     <Content Include="Images\Countries\USA.svg" />
+    <Content Include="Images\Medals\bronze-transparent-bg.png" />
     <Content Include="Images\Medals\bronze.png" />
+    <Content Include="Images\Medals\gold-transparent-bg.png" />
     <Content Include="Images\Medals\gold.png" />
+    <Content Include="Images\Medals\silver-transparent-bg.png" />
     <Content Include="Images\Medals\silver.png" />
+    <Content Include="Images\Players\cilic1.jpg" />
+    <Content Include="Images\Players\cilic2.jpg" />
+    <Content Include="Images\Players\djokovic1.jpg" />
+    <Content Include="Images\Players\djokovic2.jpg" />
+    <Content Include="Images\Players\Federer1.jpg" />
+    <Content Include="Images\Players\Federer2.jpg" />
+    <Content Include="Images\Players\murray1.jpg" />
+    <Content Include="Images\Players\murray2.jpg" />
+    <Content Include="Images\Players\nadal1.jpg" />
+    <Content Include="Images\Players\nadal2.jpg" />
+    <Content Include="Images\Players\Nishikori1.jpg" />
+    <Content Include="Images\Players\Nishikori2.jpg" />
+    <Content Include="Images\Players\raonic1.jpg" />
+    <Content Include="Images\Players\raonic2.jpg" />
+    <Content Include="Images\Players\thiem1.jpg" />
+    <Content Include="Images\Players\thiem2.jpg" />
+    <Content Include="Images\Players\tsonga1.jpg" />
+    <Content Include="Images\Players\tsonga2.jpg" />
+    <Content Include="Images\Players\Wawrinka1.jpg" />
+    <Content Include="Images\Players\Wawrinka2.jpg" />
+    <Content Include="Images\Venues\stadium1.jpg" />
+    <Content Include="Images\Venues\stadium3.jpg" />
+    <Content Include="Images\Venues\staduim2.jpg" />
+    <Content Include="Images\Venues\tenniscourt1.jpg" />
+    <Content Include="Images\Venues\tenniscourt2.jpg" />
     <Content Include="players.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -347,7 +375,6 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\Players\" />
     <Folder Include="Views\API\" />
   </ItemGroup>
   <ItemGroup>
