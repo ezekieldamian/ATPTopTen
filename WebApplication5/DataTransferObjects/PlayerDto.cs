@@ -1,4 +1,6 @@
-﻿namespace WebApplication5.DataTransferObjects
+﻿using System;
+
+namespace WebApplication5.DataTransferObjects
 {
     public class PlayerDto
     {
@@ -10,6 +12,7 @@
 
         public string LastName { get; set; }
 
+        [Obsolete]
         public string NatlCode { get; set; }
 
         public int Points { get; set; }

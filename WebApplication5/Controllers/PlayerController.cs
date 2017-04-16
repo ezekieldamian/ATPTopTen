@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using WebApplication5.Models;
+using System.Data.Entity;
 using WebApplication5.ViewModel;
 
 namespace WebApplication5.Controllers
@@ -46,7 +47,8 @@ namespace WebApplication5.Controllers
                 position = 1;
             }
 
-            var player = dbContext.Players.FirstOrDefault(x => x.Rank == position.Value);
+            var player = dbContext.Players.Include(x=> x.Country)
+                .FirstOrDefault(x => x.Rank == position.Value);
 
             if (player == null)
             {

@@ -53,7 +53,8 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                var player = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerId);
+                var player = dbContext.Players.Include(x => x.Country)
+                    .SingleOrDefault(x => x.PlayerId == playerId);
 
                 if (player == null)
                 {
@@ -75,7 +76,8 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                var player = dbContext.Players.SingleOrDefault(x => x.Rank == rank);
+                var player = dbContext.Players.Include(x => x.Country)
+                    .SingleOrDefault(x => x.Rank == rank);
 
                 if (player == null)
                 {
@@ -136,7 +138,8 @@ namespace WebApplication5.Controllers.API
                     return BadRequest("Required parameter Player is null");
                 }
 
-                var playerInDb = dbContext.Players.SingleOrDefault(x => x.PlayerId == playerId);
+                var playerInDb = dbContext.Players.Include(x => x.Country)
+                    .SingleOrDefault(x => x.PlayerId == playerId);
 
                 if (playerInDb == null)
                 {
