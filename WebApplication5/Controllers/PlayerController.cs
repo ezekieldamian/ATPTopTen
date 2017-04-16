@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using WebApplication5.Models;
@@ -22,8 +19,8 @@ namespace WebApplication5.Controllers
         {
             dbContext.Dispose();
         }
-        
-        public ActionResult Index(int? pageIndex, string sortBy)
+
+        public ActionResult TopTenList(int? pageIndex, string sortBy)
         {
             if (!pageIndex.HasValue)
             {
@@ -36,13 +33,13 @@ namespace WebApplication5.Controllers
             }
 
             var players = dbContext.Players.SortBy(sortBy);
-            
+
             return View(players);
         }
 
         //[Route("player/rank/{position:regex(\\d{1,2}):range(1,10)}")]
         [Route("player/rank/{position}")]
-        public ActionResult ByRank(int? position)
+        public ActionResult PlayerDetailsByRank(int? position)
         {
             if (!position.HasValue)
             {

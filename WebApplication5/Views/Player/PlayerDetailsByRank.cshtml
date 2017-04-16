@@ -1,7 +1,7 @@
 ﻿@model WebApplication5.ViewModel.PlayerViewModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Player Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
@@ -22,9 +22,9 @@
             positionClass = null;
             break;
     }
-    
-}
 
+}
+<h1>@ViewBag.Title</h1>
 <h2 class="inline">@Model.Player.Rank. @Model.Player.FirstName @Model.Player.LastName</h2>
 <div class="inline @positionClass"></div>
 <img class="inline black_border" width="50px" src="~/Images/Countries/@(Model.Player.NatlCode).svg" alt="">
