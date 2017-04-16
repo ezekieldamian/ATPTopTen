@@ -335,11 +335,10 @@
     <Content Include="Images\Players\tsonga2.jpg" />
     <Content Include="Images\Players\Wawrinka1.jpg" />
     <Content Include="Images\Players\Wawrinka2.jpg" />
-    <Content Include="Images\Venues\stadium1.jpg" />
-    <Content Include="Images\Venues\stadium3.jpg" />
-    <Content Include="Images\Venues\staduim2.jpg" />
     <Content Include="Images\Venues\tenniscourt1.jpg" />
     <Content Include="Images\Venues\tenniscourt2.jpg" />
+    <Content Include="Images\Venues\tenniscourt3.jpg" />
+    <Content Include="Images\Venues\tenniscourt4.jpg" />
     <Content Include="players.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
