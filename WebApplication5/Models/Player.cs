@@ -13,6 +13,7 @@ namespace WebApplication5.Models
 
         public string LastName { get; set; }
 
+        [Obsolete]
         public string NatlCode { get; set; }
 
         public int? CountryId { get; set; }
