@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WebApplication5.DataTransferObjects
+﻿namespace WebApplication5.DataTransferObjects
 {
     public class PlayerDto
     {
@@ -21,5 +16,9 @@ namespace WebApplication5.DataTransferObjects
 
         public bool IsTie { get; set; }
         public string CareerSummaryHtml { get; set; }
+
+        public int? CountryId { get; set; }
+
+        public CountryDto Country { get; set; }
     }
 }

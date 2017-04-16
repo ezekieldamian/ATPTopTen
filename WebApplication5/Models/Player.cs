@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication5.Models
 {
@@ -17,10 +15,14 @@ namespace WebApplication5.Models
 
         public string NatlCode { get; set; }
 
+        public int? CountryId { get; set; }
+
         public int Points { get; set; }
 
         public bool IsTie { get; set; }
 
         public string CareerSummaryHtml { get; set; }
+
+        public Country Country { get; set; }
     }
 }

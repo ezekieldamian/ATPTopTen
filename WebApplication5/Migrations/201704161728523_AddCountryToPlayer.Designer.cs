@@ -7,13 +7,13 @@ namespace WebApplication5.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class MakeCountryCodePrimaryKey : IMigrationMetadata
+    public sealed partial class AddCountryToPlayer : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MakeCountryCodePrimaryKey));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCountryToPlayer));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704150928258_MakeCountryCodePrimaryKey"; }
+            get { return "201704161728523_AddCountryToPlayer"; }
         }
         
         string IMigrationMetadata.Source

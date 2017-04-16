@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace WebApplication5.Migrations
             Sql("Delete from players");
 
             var api = new PlayersController();
+
+            //Debugger.Launch();
 
             var players = api.GetInitialPlayersData().Result;
 

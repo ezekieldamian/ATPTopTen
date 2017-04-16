@@ -12,6 +12,7 @@ using WebApplication5.DataTransferObjects;
 using WebApplication5.HelperClasses;
 using WebApplication5.Models;
 using WebApplication5.Properties;
+using System.Data.Entity;
 
 namespace WebApplication5.Controllers.API
 {
@@ -36,7 +37,8 @@ namespace WebApplication5.Controllers.API
         {
             try
             {
-                return Ok(dbContext.Players.ToList().Select(Mapper.Map<Player, PlayerDto>));
+                return Ok(dbContext.Players.Include(x=>x.Country)
+                    .ToList().Select(Mapper.Map<Player, PlayerDto>));
             }
             catch (Exception ex)
             {
@@ -231,7 +233,7 @@ namespace WebApplication5.Controllers.API
             var response = await client.GetAsync(fullUri);
 
             var jsonResult = response.Content.ReadAsStringAsync().Result;
-
+            
             var resultObjects = JsonConvert.DeserializeObject<IEnumerable<Player>>(jsonResult);
 
             return resultObjects;
