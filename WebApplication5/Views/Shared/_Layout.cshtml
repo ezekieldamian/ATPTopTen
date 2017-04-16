@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+@{
+    //load different background every minute
+    var htmlBackground = "html-background-" + (int.Parse(DateTime.Now.ToString("mm")) % 4 + 1);
+}
+<html class="background-cover @htmlBackground">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

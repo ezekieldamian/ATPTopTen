@@ -99,8 +99,31 @@ p {
     width: 50px;
 }
 
-html {
+.html-background-am {
     background: url("../Images/Venues/tenniscourt1.jpg") no-repeat center center fixed;
+}
+
+.html-background-pm {
+    background: url("../Images/Venues/tenniscourt2.jpg") no-repeat center center fixed;
+}
+
+.html-background-1 {
+    background: url("../Images/Venues/tenniscourt1.jpg") no-repeat center center fixed;
+}
+
+.html-background-2 {
+    background: url("../Images/Venues/tenniscourt2.jpg") no-repeat center center fixed;
+}
+
+.html-background-3 {
+    background: url("../Images/Venues/tenniscourt3.jpg") no-repeat center center fixed;
+}
+
+.html-background-4 {
+    background: url("../Images/Venues/tenniscourt4.jpg") no-repeat center center fixed;
+}
+
+.background-cover {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
