@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication5.Models
@@ -25,5 +26,7 @@ namespace WebApplication5.Models
         public string CareerSummaryHtml { get; set; }
 
         public Country Country { get; set; }
+
+        public IEnumerable<HeadToHead> HeadToHeads { get; set; }
     }
 }
