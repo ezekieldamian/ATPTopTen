@@ -290,6 +290,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-ATPTopTen-20170412110652.mdf" />
+    <Content Include="App_Data\aspnet-ATPTopTen-20170412110652_log.ldf">
+      <DependentUpon>aspnet-ATPTopTen-20170412110652.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -385,7 +389,6 @@
     <Content Include="Views\Player\_HeadToHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\API\" />
   </ItemGroup>
   <ItemGroup>
