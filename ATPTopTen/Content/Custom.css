@@ -82,6 +82,14 @@ p {
     display: inline-block;
 }
 
+.indented {
+    margin-left: 20px !important;
+}
+
+.indented-top {
+    margin-top: 20px !important;
+}
+
 .margin40 {
     margin: 40px;
 }
@@ -182,34 +190,35 @@ p li {
 #next-button {
     float: right;
 }
+
 .navbar > .container {
     text-align: center;
- }
+}
 
- .navbar-header {
+.navbar-header {
     float: none;
     display: inline-block;
- }
+}
 
- .navbar-brand {
+.navbar-brand {
     float: none;
     display: inline-block;
- }
+}
 
- .navbar .navbar-nav {
+.navbar .navbar-nav {
     float: none;
     display: inline-block;
     clear: none;
- }
+}
 
- .navbar .navbar-nav > li {
-    float: none;
-    display: inline-block;
- }
+    .navbar .navbar-nav > li {
+        float: none;
+        display: inline-block;
+    }
 
- .navbar .navbar-nav > li li {
-    text-align: left
- }
+        .navbar .navbar-nav > li li {
+            text-align: left;
+        }
 
 .collapse.navbar-collapse#centerednav {
     float: none;
@@ -218,7 +227,26 @@ p li {
     clear: none;
 }
 
-.navbar
-{
+.navbar {
     border-bottom: 1px gray solid;
+}
+
+.player {
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 50px;
+}
+
+.player-nav {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+/*stop button from moving!!*/
+.btn, .btn-primary, .btn:hover, .btn-primary:hover {
+    border: none;
+    margin: 0;
 }

@@ -380,6 +380,7 @@
     <Content Include="Views\Player\TopTenList.cshtml" />
     <Content Include="Views\Player\PlayerDetailsByRank.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Player\_HeadToHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\API\" />
