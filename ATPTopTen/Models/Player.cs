@@ -27,5 +27,7 @@ namespace ATPTopTen.Models
         public Country Country { get; set; }
 
         public IEnumerable<HeadToHead> HeadToHeads { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

@@ -28,8 +28,11 @@
             positionClass = null;
             break;
     }
+
+    string favoritesClass = Model.Player.IsFavorite ? "fav-star" : "fav-none";
+
 }
-<br/>
+<br />
 <div data-container="body" class="btn btn-primary">
     @{
         @Html.ActionLink("< Back to top ten", "TopTenList", "Player", null, null)
@@ -39,9 +42,9 @@
     <div class="inline">
         <h1>@PlayerFullName</h1>
     </div>
-    <div class="btn btn-primary inline indented">
+    <div class="inline">
         @{
-            @Html.ActionLink("Add to Favorites", "AddToFavorites", "Player", null, null)
+            @Html.ActionLink("Add to Favorites", "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesClass })
         }
     </div>
     <div id="header-details">

@@ -216,6 +216,10 @@
     <Compile Include="Controllers\API\PlayersController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="DataTransferObjects\HeadToHeadDto.cs" />
+    <Compile Include="Migrations\201704171308598_AddIsFavorite.cs" />
+    <Compile Include="Migrations\201704171308598_AddIsFavorite.Designer.cs">
+      <DependentUpon>201704171308598_AddIsFavorite.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="DataTransferObjects\CountryDto.cs" />
     <Compile Include="DataTransferObjects\PlayerDto.cs" />
@@ -286,10 +290,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-ATPTopTen-20170412110652.mdf" />
-    <Content Include="App_Data\aspnet-ATPTopTen-20170412110652_log.ldf">
-      <DependentUpon>aspnet-ATPTopTen-20170412110652.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -338,6 +338,8 @@
     <Content Include="Images\Players\tsonga2.jpg" />
     <Content Include="Images\Players\Wawrinka1.jpg" />
     <Content Include="Images\Players\Wawrinka2.jpg" />
+    <Content Include="Images\Stars\favorite-gray.png" />
+    <Content Include="Images\Stars\favorite.png" />
     <Content Include="Images\Venues\tenniscourt1.jpg" />
     <Content Include="Images\Venues\tenniscourt2.jpg" />
     <Content Include="Images\Venues\tenniscourt3.jpg" />
@@ -383,6 +385,7 @@
     <Content Include="Views\Player\_HeadToHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\API\" />
   </ItemGroup>
   <ItemGroup>
@@ -429,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704161733381_PopulateCountryId.resx">
       <DependentUpon>201704161733381_PopulateCountryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704171308598_AddIsFavorite.resx">
+      <DependentUpon>201704171308598_AddIsFavorite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

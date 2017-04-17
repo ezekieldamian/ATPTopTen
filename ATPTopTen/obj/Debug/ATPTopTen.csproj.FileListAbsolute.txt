@@ -103,3 +103,4 @@ C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopT
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.csproj.GenerateResource.Cache
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.dll
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.pdb
+C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.AddIsFavorite.resources

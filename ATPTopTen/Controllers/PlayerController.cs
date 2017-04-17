@@ -101,5 +101,35 @@ namespace ATPTopTen.Controllers
             //return viewmodel
             return View(playerViewModel);
         }
+
+        public ActionResult AddToFavorites(int rank)
+        {
+            //get players list and country where rank = rank
+            var player = dbContext.Players.Include(x => x.Country)
+                .FirstOrDefault(x => x.Rank == rank);
+
+            //return if not found
+            if (player == null)
+            {
+                return HttpNotFound();
+            }
+
+            //eager loading head to heads
+            player.HeadToHeads = dbContext.HeadToHead.Where(x => x.WinnerId == player.PlayerId);
+
+            //update favorite status
+            player.IsFavorite = !player.IsFavorite;
+            dbContext.SaveChanges();
+
+            //create viewmodel
+            var playerViewModel = new PlayerViewModel()
+            {
+                Player = player
+            };
+
+            //reload page
+            //todo: call this with javascript!!
+            return View("PlayerDetailsByRank", playerViewModel);
+        }
     }
 }

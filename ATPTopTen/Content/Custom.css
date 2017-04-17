@@ -90,6 +90,14 @@ p {
     margin-top: 20px !important;
 }
 
+.margin20 {
+    margin: 20px;
+}
+
+.margin30 {
+    margin: 30px;
+}
+
 .margin40 {
     margin: 40px;
 }
@@ -165,7 +173,10 @@ p li {
 
 #main-logo {
     float: right;
-    margin: 40px;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 30px;
 }
 
 #main-container {
@@ -249,4 +260,22 @@ p li {
 .btn, .btn-primary, .btn:hover, .btn-primary:hover {
     border: none;
     margin: 0;
+}
+
+.fav-star {
+    content: url('../Images/Stars/favorite.png');
+}
+
+.fav-none {
+    content: url('../Images/Stars/favorite-gray.png');
+}
+
+.fav {
+    width: 36px;
+    height: 36px;
+}
+
+.fav-link {
+    display: block;
+    text-indent: -9999px; /* hides the link text */
 }
