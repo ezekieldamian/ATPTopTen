@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication5.ViewModel.PlayerViewModel>
+
+@{
+    ViewBag.Title = "ATP Top Ten";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div class="inline">
+    <img style="float: right; margin: 40px;" height="500" src="~/Images/atp_masters_logo.png" />
+</div>
+<div class="inline" style="margin: 40px ">
+    @foreach (var player in Model)
+    {
+        string positionClass;
+
+        switch (player.Player.Rank)
+        {
+            case 1:
+                positionClass = "small-size gold";
+                break;
+            case 2:
+                positionClass = "small-size silver";
+                break;
+            case 3:
+                positionClass = "small-size bronze";
+                break;
+            default:
+                positionClass = null;
+                break;
+        }
+        var playerName = @player.Player.FirstName + " " + @player.Player.LastName;
+
+        <div>
+            <h2 class="inline">@player.Player.Rank. @Html.ActionLink(playerName, "PlayerDetailsByRank", "Player", new {rank = player.Player.Rank}, null)</h2>
+            <div class="inline @positionClass"></div>
+        </div>
+    }
+</div>
