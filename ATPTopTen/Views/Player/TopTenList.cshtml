@@ -37,7 +37,7 @@
         <div>
             <h2 class="inline">@player.Player.Rank. @Html.ActionLink(playerName, "PlayerDetailsByRank", "Player", new { rank = player.Player.Rank }, null)</h2>
             <div class="inline @positionClass"></div>
-            <div class="inline fav @favoritesClass"></div>
+            <div class="inline fav-small @favoritesClass"></div>
         </div>
     }
 </div>

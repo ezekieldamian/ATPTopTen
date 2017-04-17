@@ -42,21 +42,26 @@
     <div class="inline">
         <h1>@PlayerFullName</h1>
     </div>
-    <div class="inline">
+    <div class="inline indented">
         @{
             @Html.ActionLink("Add to Favorites", "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesClass })
         }
     </div>
     <div id="header-details">
         <div class="inline">
-            <div id="ranking">
+            <div class="detail-item">
                 <h3>
                     Ranking: @Model.Player.Rank <span class="@positionClass indented"></span>
                 </h3>
             </div>
-            <div id="country indented">
+            <div class="detail-item">
                 <h3>
                     Nationality: @Model.Player.Country.Name <img class="inline black_border flag indented" src="~/Images/Countries/@(Model.Player.Country.Code).svg" alt="@Model.Player.Country.Name">
+                </h3>
+            </div>
+            <div class="detail-item">
+                <h3>
+                    Favorite: @(Model.Player.IsFavorite ? "Yes" : "No")
                 </h3>
             </div>
         </div>

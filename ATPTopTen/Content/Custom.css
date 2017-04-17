@@ -154,7 +154,7 @@ p li {
     margin: 10px 0;
 }
 
-#country {
+.detail-item {
     width: 400px;
 }
 
@@ -275,7 +275,11 @@ p li {
     height: 36px;
 }
 
+.fav-small {
+    width: 24px;
+    height: 24px;
+}
+
 .fav-link {
     display: block;
-    text-indent: -9999px; /* hides the link text */
 }
