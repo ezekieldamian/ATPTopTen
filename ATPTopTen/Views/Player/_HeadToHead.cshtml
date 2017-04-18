@@ -1,6 +1,15 @@
-﻿@model ATPTopTen.ViewModel.ViewModelBase
+﻿@using System.Runtime.InteropServices
+@using ATPTopTen.Controllers.API
+@using ATPTopTen.Models
+@model ATPTopTen.ViewModel.ViewModelBase
+
+@functions {
+    public List<Player> PlayerList { get; set; }
+}
 
 @{
+    PlayerList = Model.Players;
+
     var listItems = new List<SelectListItem>();
 
     foreach (var player in Model.Players)
@@ -15,11 +24,30 @@
     <div class="container margin20">
         <div id="centerednav" class="inline navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --")</li>
+                <li id="head1data">@Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --", new { id = "Players-1" })</li>
                 <li><span>Vs.</span></li>
-                <li>@Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --")</li>
-                <li><button class="btn btn-primary">Go</button></li>
+                <li id="head2data">@Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --", new { id = "Players-2" })</li>
             </ul>
+            <button class="btn btn-primary js-head">Go</button>
+        </div>
+        <div id="Head2HeadResults">
+            Please pick two players...
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#centerednav .js-head').on('click',// '.js-head-button',
+                function () {
+                    var player1Id = $('#Players-1 option:selected').val();
+                    var player2Id = $('#Players-2 option:selected').val();
+
+                    var placeholder = document.getElementById("Head2HeadResults");
+                    placeholder.innerHTML = player1Id + " Vs. " + player2Id;
+                });
+        });
+    </script>
+}

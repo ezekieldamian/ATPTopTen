@@ -90,6 +90,10 @@ p {
     margin-top: 20px !important;
 }
 
+.indented-top40 {
+    margin-top: 40px !important;
+}
+
 .margin20 {
     margin: 20px;
 }
