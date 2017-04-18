@@ -11,7 +11,7 @@
 
 If I had more time, a few improvements that I would make are:
   
-    1) Finish displaying Head to Head information using Javascript
+    1) Add pictures, formatting to Head to Head information
     2) Make sure the app is resposive for different devices (started working on it, but ran out of time)
     3) Adding to favorites with Javascript so that the page doesn't have to be reloaded when clicking Add to Favorites
     4) Add dependency injection to be able to unit test the Controllers
