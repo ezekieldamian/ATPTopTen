@@ -29,7 +29,11 @@
             break;
     }
 
-    string favoritesClass = Model.Player.IsFavorite ? "fav-star" : "fav-none";
+    var favoritesButtonClass = Model.Player.IsFavorite ? "fav-star" : "fav-none";
+    var favoritesImageClass = Model.Player.IsFavorite ? "fav-star-image" : string.Empty;
+    var addToFavoritesButtonText = !Model.Player.IsFavorite
+        ? "Add to Favorites"
+        : "Remove Favorite ";
 
 }
 <br />
@@ -42,11 +46,11 @@
     <div class="inline">
         <h1>@PlayerFullName</h1>
     </div>
-    <div class="inline indented">
+    <button class="inline indented btn btn-primary" style="float: right; margin-right: 20px;">
         @{
-            @Html.ActionLink("Add to Favorites", "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesClass })
+            @Html.ActionLink(addToFavoritesButtonText, "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesButtonClass })
         }
-    </div>
+    </button>
     <div id="header-details">
         <div class="inline">
             <div class="detail-item">
@@ -60,9 +64,12 @@
                 </h3>
             </div>
             <div class="detail-item">
-                <h3>
-                    Favorite: @(Model.Player.IsFavorite ? "Yes" : "No")
-                </h3>
+                <div class="inline">
+                    <h3>
+                        Favorite: @(Model.Player.IsFavorite ? "Yes" : "No")
+                    </h3>
+                </div>
+                <div class="inline indented fav-small @favoritesImageClass"></div>
             </div>
         </div>
         @{

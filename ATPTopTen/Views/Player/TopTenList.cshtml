@@ -1,5 +1,4 @@
-﻿@using ATPTopTen.ViewModel
-@model ATPTopTen.ViewModel.PlayerListViewModel
+﻿@model ATPTopTen.ViewModel.PlayerListViewModel
 
 @{
     ViewBag.Title = "ATP Top Ten Players";
@@ -7,7 +6,8 @@
 }
 
 @*@Html.Partial("../Player/_HeadToHead")*@
-<h1 class="center-text">@ViewBag.Title</h1>
+<br />
+<h1 class="center-text indented-top">@ViewBag.Title</h1>
 
 <div id="main-logo" class="inline">
     <img height="500" src="~/Images/atp_masters_logo.png" />
@@ -34,7 +34,7 @@
         }
         var playerName = @player.FirstName + " " + @player.LastName;
 
-        var favoritesClass = player.IsFavorite ? "fav-star" : string.Empty;
+        var favoritesClass = player.IsFavorite ? "fav-star-image" : string.Empty;
 
         <div>
             <h2 class="inline">

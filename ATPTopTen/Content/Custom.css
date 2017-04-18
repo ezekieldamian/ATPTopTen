@@ -83,7 +83,7 @@ p {
 }
 
 .indented {
-    margin-left: 20px !important;
+    margin-left: 5px !important;
 }
 
 .indented-top {
@@ -236,7 +236,7 @@ p li {
     display: inline-block !important;
     width: auto;
     clear: none;
-    color: black;
+    color: darkgray;
 }
 
 .navbar {
@@ -264,16 +264,26 @@ p li {
 }
 
 .fav-star {
-    content: url('../Images/Stars/favorite.png');
+    background: url('../Images/Stars/favorite.png');
+    padding: 5px;
 }
 
 .fav-none {
+    background: url('../Images/Stars/favorite-gray.png');
+    padding: 5px;
+}
+
+.fav-star-image {
+    content: url('../Images/Stars/favorite.png');
+}
+
+.fav-none-image {
     content: url('../Images/Stars/favorite-gray.png');
 }
 
 .fav {
-    width: 36px;
-    height: 36px;
+    /*width: 36px;*/
+    /*height: 36px;*/
 }
 
 .fav-small {
@@ -283,4 +293,8 @@ p li {
 
 .fav-link {
     display: block;
+    background-position: -0px -0px;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    padding-left: 41px;
 }
