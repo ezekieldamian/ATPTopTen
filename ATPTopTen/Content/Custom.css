@@ -82,6 +82,11 @@ p {
     display: inline-block;
 }
 
+.fav-button {
+    float: right;
+    margin-right: 20px;
+}
+
 .indented {
     margin-left: 5px !important;
 }
@@ -235,16 +240,10 @@ p li {
             text-align: left;
         }
 
-.collapse.navbar-collapse#centerednav {
-    float: none;
-    display: inline-block !important;
-    width: auto;
-    clear: none;
+.centered {
+    width: 95%;
+    margin: 0 auto;
     color: darkgray;
-}
-
-.navbar {
-    border-bottom: 1px gray solid;
 }
 
 .player {
@@ -301,4 +300,13 @@ p li {
     background-repeat: no-repeat;
     background-size: 24px 24px;
     padding-left: 41px;
+}
+
+.bigTitle {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.body {
+    padding-top: 0 !important;
 }

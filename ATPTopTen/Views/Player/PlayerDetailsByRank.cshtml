@@ -37,7 +37,7 @@
 
 }
 <br />
-<div class="btn btn-primary indented-top40">
+<div class="btn btn-primary">
     @{
         @Html.ActionLink("< Back to top ten", "TopTenList", "Player", null, null)
     }
@@ -46,7 +46,7 @@
     <div class="inline">
         <h1>@PlayerFullName</h1>
     </div>
-    <button class="inline indented btn btn-primary" style="float: right; margin-right: 20px;">
+    <button class="inline indented btn btn-primary fav-button">
         @{
             @Html.ActionLink(addToFavoritesButtonText, "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesButtonClass })
         }

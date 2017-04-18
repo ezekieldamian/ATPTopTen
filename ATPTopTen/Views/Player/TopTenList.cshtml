@@ -1,12 +1,72 @@
-﻿@model ATPTopTen.ViewModel.PlayerListViewModel
+﻿@using ATPTopTen.Models
+@model ATPTopTen.ViewModel.PlayerListViewModel
+
+@functions {
+    public List<Player> PlayerList { get; set; }
+}
 
 @{
     ViewBag.Title = "ATP Top Ten Players";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    PlayerList = Model.Players;
+
+    var listItems = new List<SelectListItem>();
+
+    foreach (var player in Model.Players)
+    {
+        var playerName = player.FirstName + " " + player.LastName;
+
+        listItems.Add(new SelectListItem() { Text = playerName, Value = player.PlayerId });
+    }
+}
+
 @*@Html.Partial("../Player/_HeadToHead")*@
 <br />
+<div class="container centered">
+    <div class="indented">
+        <ul class="nav navbar-nav">
+            <li class="indented" id="head1data">
+                @Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --",
+                                               new
+                                               {
+                                                   id = "Players-1",
+                                                   onchange = "document.getElementById('Head1').value = this.value;"
+                                               })
+            </li>
+            <li class="indented"><span> Vs. </span></li>
+            <li class="indented" id="head2data">
+                @Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --",
+                                           new
+                                           {
+                                               id = "Players-2",
+                                               onchange = "document.getElementById('Head2').value = this.value;"
+                                           })
+            </li>
+            @* new { onchange = "document.getElementById('Head1').value = this.value;" } *@
+        </ul>
+        <p>@Html.Hidden("Head1")</p>
+        <p>@Html.Hidden("Head2")</p>
+        <div class="indented">
+            <button id="head-button" class="indented btn btn-primary js-head">
+                Head to Head
+                @*@{
+                        @Html.ActionLink("Go", "TopTenList", "Player", new { player1Id = Html.Hidden("Head1"), player2Id = Html.Hidden("Head2") })
+                    }*@
+            </button>
+        </div>
+    </div>
+    <div id="Head2HeadResults" class="centered bigTitle indented-top">
+        @*Please pick two players...*@
+        @(Model.Head1Player.FirstName) @(Model.Head1Player.LastName) (@(Model.Head1Player.HeadToHeads.FirstOrDefault(x => x.OpponentId == Model.Head2Player.PlayerId)?.NumberOfWins))
+        Vs.
+        @(Model.Head2Player.FirstName) @(Model.Head2Player.LastName) (@(Model.Head2Player.HeadToHeads.FirstOrDefault(x => x.OpponentId == Model.Head1Player.PlayerId)?.NumberOfWins))
+    </div>
+</div>
+<br />
+
 <h1 class="center-text indented-top40">@ViewBag.Title</h1>
 
 <div id="main-logo" class="inline">
@@ -46,37 +106,26 @@
             <div class="inline @positionClass"></div>
             <div class="inline fav-small @favoritesClass"></div>
         </div>
-
-        @*
-            //todo: how to get head to head info with javascript???
-            <script>
-                var playerData = @player.Player.HeadToHeads.Where()???
-            </script>*@
-
-        @*<button data-player-id="@playerName (0)"
-                    class="btn btn-primary js-head1">Head 1</button>
-            <button data-player-id="@playerName (0)"
-                    class="btn btn-primary js-head2">Head 2</button>*@
     }
 </div>
 
-@*@section scripts
-    {
-        <script>
-            $(document).ready(function () {
-                $("#playerList").on("click", ".js-head1",
-                    function () {
-                        var button = $(this);
-                        var head1 = document.getElementById("head1data");
-                        head1.innerHTML = button.attr("data-player-id");
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#head-button").on('click',
+                function () {
+                    //alert(document.getElementById('Head1').value);
+                    var head1 = document.getElementById('Head1').value;//$("Head1").val();//document.getElementById('Head2').value
+                    var head2 = document.getElementById('Head2').value;//$("Head2").val();//document.getElementById('Head2').value
+                    $.ajax({
+                        url: '../api/players/headtohead/' + head1 + '/' + head2,
+                        method: 'GET',
+                        success: function (result) {
+                            //alert(result);
+                            document.getElementById('Head2HeadResults').innerHTML = result;
+                        }
                     });
-
-                $("#playerList").on("click", ".js-head2",
-                    function () {
-                        var button = $(this);
-                        var head2 = document.getElementById("head2data");
-                        head2.innerHTML = button.attr("data-player-id");
-                    });
-            });
-        </script>
-    }*@
+                });
+        });
+    </script>
+}

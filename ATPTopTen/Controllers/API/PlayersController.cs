@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -264,6 +265,51 @@ namespace ATPTopTen.Controllers.API
 
                 //return ok if no errors
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                //return innermost exception if any
+                return BadRequest(ExceptionHelper.FindInnermostException(ex).Message);
+            }
+        }
+
+        [Route("api/players/headtohead/{player1id}/{player2Id}")]
+        public IHttpActionResult GetHeadToHeadData(string player1Id, string player2Id)
+        {
+            try
+            {
+                var winner = dbContext.Players.ToList().SingleOrDefault(x => x.PlayerId == player1Id);
+                var opponent = dbContext.Players.ToList().SingleOrDefault(x => x.PlayerId == player2Id);
+
+                //return if not found
+                if (winner == null || opponent == null)
+                {
+                    //todo: make this check on the client side!!!
+                    return NotFound();
+                }
+
+                if (winner == opponent)
+                {
+                    //todo: make this check on the client side!!!
+                    return BadRequest();
+                }
+
+                //get head to head data
+                winner.HeadToHeads = dbContext.HeadToHead.Where(x => x.WinnerId == winner.PlayerId).ToList();
+                opponent.HeadToHeads = dbContext.HeadToHead.Where(x => x.WinnerId == opponent.PlayerId).ToList();
+
+                //player first name and last name
+                var player1Fullname = winner.FirstName + " " + winner.LastName;
+                var player2FullName = opponent.FirstName + " " + opponent.LastName;
+
+                //get winner data
+                var player1Wins = winner.HeadToHeads.FirstOrDefault(x => x.OpponentId == player2Id)?.NumberOfWins.ToString() ?? "-";
+                var player2Wins = opponent.HeadToHeads.FirstOrDefault(x => x.OpponentId == player1Id)?.NumberOfWins.ToString() ?? "-";
+
+                var returnString = $"{player1Fullname} ({player1Wins}) Vs. {player2FullName} ({player2Wins})";
+
+                //convert to dto and return
+                return Ok(returnString);
             }
             catch (Exception ex)
             {
