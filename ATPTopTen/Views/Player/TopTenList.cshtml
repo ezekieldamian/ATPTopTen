@@ -1,5 +1,4 @@
-﻿@using ATPTopTen.Models
-@model ATPTopTen.ViewModel.PlayerListViewModel
+﻿@model ATPTopTen.ViewModel.PlayerListViewModel
 
 @{
     ViewBag.Title = "ATP Top Ten Players";
@@ -13,6 +12,9 @@
 <div id="main-logo" class="inline">
     <img height="500" src="~/Images/atp_masters_logo.png" />
 </div>
+@*
+    //todo: make resposive tables with bootstrap!!
+*@
 <div id="playerList" class="inline margin40">
     @foreach (var player in Model.Players)
     {
@@ -45,7 +47,9 @@
             <div class="inline fav-small @favoritesClass"></div>
         </div>
 
-        @*<script>
+        @*
+            //todo: how to get head to head info with javascript???
+            <script>
                 var playerData = @player.Player.HeadToHeads.Where()???
             </script>*@
 

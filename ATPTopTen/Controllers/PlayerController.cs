@@ -70,7 +70,6 @@ namespace ATPTopTen.Controllers
         /// <summary>
         /// Get player details of ATP Top Ten player by rank
         /// </summary>
-        /// <param name="viewModel"></param>
         /// <param name="rank"></param>
         /// <returns></returns>
         //[Route("player/rank/{rank:regex(\\d{1,2}):range(1,10)}")]
@@ -165,31 +164,5 @@ namespace ATPTopTen.Controllers
             //return list of viewmodels
             return View(playerListViewModel);
         }
-
-        //public ActionResult ChangeHeadLeft(string playerId)
-        //{
-        //    //get players list and country where PlayerId = playerId
-        //    var player = dbContext.Players.Include(x => x.Country)
-        //        .FirstOrDefault(x => x.PlayerId == playerId);
-
-        //    //return if not found
-        //    if (player == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    //eager loading head to heads
-        //    player.HeadToHeads = dbContext.HeadToHead.Where(x => x.WinnerId == player.PlayerId);
-
-        //    //create viewmodel
-        //    var playerViewModel = new PlayerViewModel()
-        //    {
-        //        Player = player
-        //    };
-
-        //    //reload page
-        //    //todo: call this with javascript!!
-        //    return View("_HeadToHead", playerViewModel);
-        //}
     }
 }
