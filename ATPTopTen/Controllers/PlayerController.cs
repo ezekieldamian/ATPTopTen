@@ -25,7 +25,7 @@ namespace ATPTopTen.Controllers
         }
 
         /// <summary>
-        /// Get ViewModels of the ATP Top Ten players list, sorted by Rank.
+        /// Get the ATP Top Ten players list, sorted by Rank.
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="sortBy"></param>
@@ -47,8 +47,11 @@ namespace ATPTopTen.Controllers
             //get players (include country too) and sort by Rank (default)
             var players = dbContext.Players.Include(x => x.Country).SortBy(sortBy);
 
-            //create list of viewmodels
-            var listOfPlayerViewModels = new List<PlayerViewModel>();
+            //create view model
+            var playerListViewModel = new PlayerListViewModel()
+            {
+                Players = new List<Player>()
+            };
 
             foreach (var player in players)
             {
@@ -56,32 +59,27 @@ namespace ATPTopTen.Controllers
                 player.HeadToHeads = dbContext.HeadToHead
                     .Where(x => x.WinnerId == player.PlayerId);
 
-                //create view model
-                var playerViewModel = new PlayerViewModel()
-                {
-                    Player = player
-                };
-
                 //add to list
-                listOfPlayerViewModels.Add(playerViewModel);
+                playerListViewModel.Players.Add(player);
             }
 
             //return list of viewmodels
-            return View(listOfPlayerViewModels);
+            return View(playerListViewModel);
         }
 
         /// <summary>
         /// Get player details of ATP Top Ten player by rank
         /// </summary>
+        /// <param name="viewModel"></param>
         /// <param name="rank"></param>
         /// <returns></returns>
         //[Route("player/rank/{rank:regex(\\d{1,2}):range(1,10)}")]
-        [Route("player/rank/{rank}")]
+        [System.Web.Mvc.Route("player/rank/{rank}")]
         public ActionResult PlayerDetailsByRank(int rank)
         {
             //get players list and country where rank = rank
-            var player = dbContext.Players.Include(x => x.Country)
-                .FirstOrDefault(x => x.Rank == rank);
+            var players = dbContext.Players.Include(x => x.Country);
+            var player = players.FirstOrDefault(x => x.Rank == rank);
 
             //return if not found
             if (player == null)
@@ -95,6 +93,7 @@ namespace ATPTopTen.Controllers
             //create viewmodel
             var playerViewModel = new PlayerViewModel()
             {
+                Players = players.ToList(),
                 Player = player
             };
 
@@ -102,11 +101,16 @@ namespace ATPTopTen.Controllers
             return View(playerViewModel);
         }
 
+        /// <summary>
+        /// Save Favorite setting, then reload the page
+        /// </summary>
+        /// <param name="rank"></param>
+        /// <returns></returns>
         public ActionResult AddToFavorites(int rank)
         {
             //get players list and country where rank = rank
-            var player = dbContext.Players.Include(x => x.Country)
-                .FirstOrDefault(x => x.Rank == rank);
+            var players = dbContext.Players.Include(x => x.Country);
+            var player = players.FirstOrDefault(x => x.Rank == rank);
 
             //return if not found
             if (player == null)
@@ -124,6 +128,7 @@ namespace ATPTopTen.Controllers
             //create viewmodel
             var playerViewModel = new PlayerViewModel()
             {
+                Players = players.ToList(),
                 Player = player
             };
 
@@ -131,5 +136,60 @@ namespace ATPTopTen.Controllers
             //todo: call this with javascript!!
             return View("PlayerDetailsByRank", playerViewModel);
         }
+
+        /// <summary>
+        /// Get list of players needed for the Head To Head view
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult _HeadToHead()
+        {
+            //get players (include country too) and sort by Rank (default)
+            var players = dbContext.Players.Include(x => x.Country);
+
+            //create view model
+            var playerListViewModel = new PlayerListViewModel()
+            {
+                Players = new List<Player>()
+            };
+
+            foreach (var player in players)
+            {
+                //eager loading head to heads
+                player.HeadToHeads = dbContext.HeadToHead
+                    .Where(x => x.WinnerId == player.PlayerId);
+
+                //add to list
+                playerListViewModel.Players.Add(player);
+            }
+
+            //return list of viewmodels
+            return View(playerListViewModel);
+        }
+
+        //public ActionResult ChangeHeadLeft(string playerId)
+        //{
+        //    //get players list and country where PlayerId = playerId
+        //    var player = dbContext.Players.Include(x => x.Country)
+        //        .FirstOrDefault(x => x.PlayerId == playerId);
+
+        //    //return if not found
+        //    if (player == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    //eager loading head to heads
+        //    player.HeadToHeads = dbContext.HeadToHead.Where(x => x.WinnerId == player.PlayerId);
+
+        //    //create viewmodel
+        //    var playerViewModel = new PlayerViewModel()
+        //    {
+        //        Player = player
+        //    };
+
+        //    //reload page
+        //    //todo: call this with javascript!!
+        //    return View("_HeadToHead", playerViewModel);
+        //}
     }
 }

@@ -86,7 +86,6 @@ C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\bin\Microsoft.Owi
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.csprojResolveAssemblyReference.cache
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.InitialModel.resources
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.PopulatePlayers.resources
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.AddHeadToHead.resources
@@ -99,8 +98,9 @@ C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopT
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.DeleteFlagCssFromCountry.resources
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.AddCountryToPlayer.resources
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.PopulateCountryId.resources
+C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.AddIsFavorite.resources
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Properties.Resources.resources
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.csproj.GenerateResource.Cache
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.dll
 C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.pdb
-C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.Migrations.AddIsFavorite.resources
+C:\Users\XenoPhreak\Desktop\WebServiceTest\ATPTopTen\ATPTopTen\obj\Debug\ATPTopTen.csprojResolveAssemblyReference.cache

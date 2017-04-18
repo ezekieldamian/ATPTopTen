@@ -1,21 +1,23 @@
-﻿@model IEnumerable<ATPTopTen.ViewModel.PlayerViewModel>
+﻿@using ATPTopTen.ViewModel
+@model ATPTopTen.ViewModel.PlayerListViewModel
 
 @{
     ViewBag.Title = "ATP Top Ten Players";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*@Html.Partial("../Player/_HeadToHead")*@
 <h1 class="center-text">@ViewBag.Title</h1>
 
 <div id="main-logo" class="inline">
     <img height="500" src="~/Images/atp_masters_logo.png" />
 </div>
-<div class="inline margin40">
-    @foreach (var player in Model)
+<div id="playerList" class="inline margin40">
+    @foreach (var player in Model.Players)
     {
         string positionClass;
 
-        switch (player.Player.Rank)
+        switch (player.Rank)
         {
             case 1:
                 positionClass = "small-size gold";
@@ -30,14 +32,46 @@
                 positionClass = null;
                 break;
         }
-        var playerName = @player.Player.FirstName + " " + @player.Player.LastName;
+        var playerName = @player.FirstName + " " + @player.LastName;
 
-        var favoritesClass = player.Player.IsFavorite ? "fav-star" : string.Empty;
+        var favoritesClass = player.IsFavorite ? "fav-star" : string.Empty;
 
         <div>
-            <h2 class="inline">@player.Player.Rank. @Html.ActionLink(playerName, "PlayerDetailsByRank", "Player", new { rank = player.Player.Rank }, null)</h2>
+            <h2 class="inline">
+                @player.Rank. @Html.ActionLink(playerName, "PlayerDetailsByRank", "Player", new { rank = player.Rank }, null)
+            </h2>
             <div class="inline @positionClass"></div>
             <div class="inline fav-small @favoritesClass"></div>
         </div>
+
+        @*<script>
+                var playerData = @player.Player.HeadToHeads.Where()???
+            </script>*@
+
+        @*<button data-player-id="@playerName (0)"
+                    class="btn btn-primary js-head1">Head 1</button>
+            <button data-player-id="@playerName (0)"
+                    class="btn btn-primary js-head2">Head 2</button>*@
     }
 </div>
+
+@*@section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                $("#playerList").on("click", ".js-head1",
+                    function () {
+                        var button = $(this);
+                        var head1 = document.getElementById("head1data");
+                        head1.innerHTML = button.attr("data-player-id");
+                    });
+
+                $("#playerList").on("click", ".js-head2",
+                    function () {
+                        var button = $(this);
+                        var head2 = document.getElementById("head2data");
+                        head2.innerHTML = button.attr("data-player-id");
+                    });
+            });
+        </script>
+    }*@

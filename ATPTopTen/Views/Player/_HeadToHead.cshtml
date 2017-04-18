@@ -1,10 +1,24 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+﻿@model ATPTopTen.ViewModel.ViewModelBase
+
+@{
+    var listItems = new List<SelectListItem>();
+
+    foreach (var player in Model.Players)
+    {
+        var playerName = player.FirstName + " " + player.LastName;
+
+        listItems.Add(new SelectListItem() { Text = playerName, Value = player.PlayerId });
+    }
+}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container margin20">
         <div id="centerednav" class="inline navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Player1", "ChangeHeadLeft", "Player", new { area = "" }, null)</li>
+                <li>@Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --")</li>
                 <li><span>Vs.</span></li>
-                <li>@Html.ActionLink("Player2", "ChangeHeadRight", "Player", new { rank = 1 }, null)</li>
+                <li>@Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --")</li>
+                <li><button class="btn btn-primary">Go</button></li>
             </ul>
         </div>
     </div>
