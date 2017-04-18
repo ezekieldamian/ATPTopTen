@@ -25,19 +25,30 @@ If I had more time, a few improvements that I would make are:
 List of technologies used:
 
 Git for source control
+
 Entity Framework for database creation and versioning
+
 Newtonsoft.JSON for serializing/deserializing data between database and client app
+
 Bootstrap for responsive template (still working on it)
+
 MVC .Net framework for the front-end.
+
 WebAPI for the back-end.
+
 SVG for flags.
+
 Automapper to automatically map the DTOs with their Model counterparts
+
 
 
 Technologies I wanted to implement but I ran out of time:
 
 Dependency Injection (Ninject)
+
 Moq for unit testing
+
 Jquery Data Tables
+
 BootBox
 
