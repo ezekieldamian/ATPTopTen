@@ -83,12 +83,12 @@ p {
 }
 
 .fav-button {
-    float: right;
+    /*float: right;*/
     margin-right: 20px;
 }
 
 .indented {
-    margin-left: 5px !important;
+    margin-left: 10px !important;
 }
 
 .indented-top {
@@ -116,7 +116,8 @@ p {
 }
 
 .profilePicture {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .fullPicture {
@@ -172,8 +173,8 @@ p li {
 }
 
 #profile-image {
-    float: right;
-    margin: 0 0 20px 20px;
+    /*float: right;*/
+    /*margin: 0 0 20px 20px;*/
 }
 
 .center-text {
@@ -309,4 +310,12 @@ p li {
 
 .body {
     padding-top: 0 !important;
+}
+
+#head-button {
+    margin-top: -20px;
+}
+
+.indented40 {
+    margin-left: 40px !important;
 }

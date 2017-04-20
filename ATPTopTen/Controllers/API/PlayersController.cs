@@ -273,6 +273,12 @@ namespace ATPTopTen.Controllers.API
             }
         }
 
+        /// <summary>
+        /// get data needed for the Head to Head info
+        /// </summary>
+        /// <param name="player1Id"></param>
+        /// <param name="player2Id"></param>
+        /// <returns></returns>
         [Route("api/players/headtohead/{player1id}/{player2Id}")]
         public IHttpActionResult GetHeadToHeadData(string player1Id, string player2Id)
         {

@@ -37,98 +37,133 @@
 
 }
 <br />
-<div class="btn btn-primary">
-    @{
-        @Html.ActionLink("< Back to top ten", "TopTenList", "Player", null, null)
-    }
-</div>
-<div id="details-container">
-    <div class="inline">
-        <h1>@PlayerFullName</h1>
-    </div>
-    <button class="inline indented btn btn-primary fav-button">
-        @{
-            @Html.ActionLink(addToFavoritesButtonText, "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesButtonClass })
-        }
-    </button>
-    <div id="header-details">
-        <div class="inline">
-            <div class="detail-item">
-                <h3>
-                    Ranking: @Model.Player.Rank <span class="@positionClass indented"></span>
-                </h3>
-            </div>
-            <div class="detail-item">
-                <h3>
-                    Nationality: @Model.Player.Country.Name <img class="inline black_border flag indented" src="~/Images/Countries/@(Model.Player.Country.Code).svg" alt="@Model.Player.Country.Name">
-                </h3>
-            </div>
-            <div class="detail-item">
-                <div class="inline">
-                    <h3>
-                        Favorite: @(Model.Player.IsFavorite ? "Yes" : "No")
-                    </h3>
-                </div>
-                <div class="inline indented fav-small @favoritesImageClass"></div>
-            </div>
-        </div>
-        @{
-            var profileImagePath = "~/Images/Players/" + Model.Player.LastName + "1.jpg";
-            if (File.Exists(Server.MapPath(profileImagePath)))
-            {
-                <div id="profile-image" class="inline">
-                    <img class="profilePicture" src="~/Images/Players/@(Model.Player.LastName)1.jpg" alt="@PlayerFullName" />
-                </div>
-            }
-        }
-    </div>
-    @{
-        if (!Model.Player.CareerSummaryHtml.IsNullOrWhiteSpace())
-        {
-            <div id="details-biography">
-                <h2 class="bold">Career Summary:</h2>
-                <p>
-                    @(Html.Raw(HttpUtility.HtmlDecode(Model.Player.CareerSummaryHtml
-                          .Replace("<p>&gt; ", "<ul><li>").Replace("&gt;", "<li>"))))
-                </p>
-            </div>
-        }
-    }
-    @{
-        var imagePath = "~/Images/Players/" + Model.Player.LastName + "2.jpg";
-        if (File.Exists(Server.MapPath(imagePath)))
-        {
-            <div id="details-picture">
-                <p>
-                    <img class="fullPicture" src="~/Images/Players/@(Model.Player.LastName)2.jpg" alt="@PlayerFullName" />
-                </p>
-            </div>
-        }
-    }
-</div>
-<div>
-    <div class="btn btn-primary">
-        @{
-            if (Model.Player.Rank > 1)
-            {
-                @Html.ActionLink("< Previous", "PlayerDetailsByRank", "Player", new { rank = Model.Player.Rank - 1 }, null)
-            }
-            else
-            {
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn btn-primary">
+            @{
                 @Html.ActionLink("< Back to top ten", "TopTenList", "Player", null, null)
             }
-        }
+        </div>
     </div>
-    <div id="next-button" class="btn btn-primary">
-        @{
-            if (Model.Player.Rank < 10)
-            {
-                @Html.ActionLink("Next >", "PlayerDetailsByRank", "Player", new { rank = Model.Player.Rank + 1 }, null)
+</div>
+<div id="details-container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="inline">
+                <h1>@PlayerFullName</h1>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+            <button class="inline indented btn btn-primary fav-button">
+                @{
+                    @Html.ActionLink(addToFavoritesButtonText, "AddToFavorites", "Player", new { @rank = Model.Player.Rank }, new { @class = "fav fav-link " + favoritesButtonClass })
+                }
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="header-details">
+                <div class="inline">
+                    <div class="detail-item">
+                        <h3>
+                            Ranking: @Model.Player.Rank <span class="@positionClass indented"></span>
+                        </h3>
+                    </div>
+                    <div class="detail-item">
+                        <h3>
+                            Points: @Model.Player.Points
+                        </h3>
+                    </div>
+                    <div class="detail-item">
+                        <h3>
+                            Nationality: @Model.Player.Country.Name <img class="inline black_border flag indented" src="~/Images/Countries/@(Model.Player.Country.Code).svg" alt="@Model.Player.Country.Name">
+                        </h3>
+                    </div>
+                    <div class="detail-item">
+                        <div class="inline">
+                            <h3>
+                                Favorite: @(Model.Player.IsFavorite ? "Yes" : "No")
+                            </h3>
+                        </div>
+                        <div class="inline indented fav-small @favoritesImageClass"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-4 col-xs-2">
+            @{
+                var profileImagePath = "~/Images/Players/" + Model.Player.LastName + "1.jpg";
+                if (File.Exists(Server.MapPath(profileImagePath)))
+                {
+                    <div id="profile-image" class="inline">
+                        <img class="profilePicture" src="~/Images/Players/@(Model.Player.LastName)1.jpg" alt="@PlayerFullName" />
+                    </div>
+                }
             }
-            else
-            {
-                @Html.ActionLink("Go to Top Ten >", "TopTenList", "Player", null, null)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-8 col-xs-4">
+            @{
+                if (!Model.Player.CareerSummaryHtml.IsNullOrWhiteSpace())
+                {
+                    <div id="details-biography">
+                        <h2 class="bold">Career Summary:</h2>
+                        <p>
+                            @(Html.Raw(HttpUtility.HtmlDecode(Model.Player.CareerSummaryHtml
+                                  .Replace("<p>&gt; ", "<ul><li>").Replace("&gt;", "<li>"))))
+                        </p>
+                    </div>
+                }
             }
-        }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-4">
+            @{
+                var imagePath = "~/Images/Players/" + Model.Player.LastName + "2.jpg";
+                if (File.Exists(Server.MapPath(imagePath)))
+                {
+                    <div id="details-picture">
+                        <p>
+                            <img class="fullPicture" src="~/Images/Players/@(Model.Player.LastName)2.jpg" alt="@PlayerFullName" />
+                        </p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-4 col-xs-2">
+        <div class="btn btn-primary">
+            @{
+                if (Model.Player.Rank > 1)
+                {
+                    @Html.ActionLink("< Previous", "PlayerDetailsByRank", "Player", new { rank = Model.Player.Rank - 1 }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("< Back to top ten", "TopTenList", "Player", null, null)
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-4 col-xs-2">
+        <div id="next-button" class="btn btn-primary">
+            @{
+                if (Model.Player.Rank < 10)
+                {
+                    @Html.ActionLink("Next >", "PlayerDetailsByRank", "Player", new { rank = Model.Player.Rank + 1 }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Go to Top Ten >", "TopTenList", "Player", null, null)
+                }
+            }
+        </div>
     </div>
 </div>

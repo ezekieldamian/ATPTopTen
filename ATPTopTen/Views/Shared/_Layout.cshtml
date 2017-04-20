@@ -15,13 +15,14 @@
 <body>
     @*@Html.Partial("_NavBar")*@
     @*@Html.Partial("../Player/_HeadToHead")*@
-    <div id="main-container" class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Ezekiel Gallardo</p>
-        </footer>
-    </div>
+
+        <div id="main-container" class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Ezekiel Gallardo</p>
+            </footer>
+        </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

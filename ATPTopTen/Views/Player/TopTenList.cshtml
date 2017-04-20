@@ -25,88 +25,92 @@
 
 @*@Html.Partial("../Player/_HeadToHead")*@
 <br />
-<div class="container centered">
-    <div class="indented">
-        <ul class="nav navbar-nav">
-            <li class="indented" id="head1data">
-                @Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --",
-                                               new
-                                               {
-                                                   id = "Players-1",
-                                                   onchange = "document.getElementById('Head1').value = this.value;"
-                                               })
-            </li>
-            <li class="indented"><span> Vs. </span></li>
-            <li class="indented" id="head2data">
-                @Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --",
-                                           new
-                                           {
-                                               id = "Players-2",
-                                               onchange = "document.getElementById('Head2').value = this.value;"
-                                           })
-            </li>
-            @* new { onchange = "document.getElementById('Head1').value = this.value;" } *@
-        </ul>
-        <p>@Html.Hidden("Head1")</p>
-        <p>@Html.Hidden("Head2")</p>
-        <div class="indented">
-            <button id="head-button" class="indented btn btn-primary js-head">
-                Head to Head
-                @*@{
-                        @Html.ActionLink("Go", "TopTenList", "Player", new { player1Id = Html.Hidden("Head1"), player2Id = Html.Hidden("Head2") })
-                    }*@
-            </button>
+<div class="row">
+    <div class="container centered">
+        <div class="col-md-12">
+            <ul class="nav navbar-nav">
+                <li class="indented" id="head1data">
+                    @Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --",
+                        new
+                        {
+                            id = "Players-1",
+                            onchange = "document.getElementById('Head1').value = this.value;"
+                        })
+                </li>
+                <li class="indented"><span> Vs. </span></li>
+                <li class="indented" id="head2data">
+                    @Html.DropDownListFor(x => x.Players, listItems, "-- Select Player --",
+                        new
+                        {
+                            id = "Players-2",
+                            onchange = "document.getElementById('Head2').value = this.value;"
+                        })
+                </li>
+            </ul>
+            <p>@Html.Hidden("Head1")</p>
+            <p>@Html.Hidden("Head2")</p>
+            <div class="indented">
+                <button id="head-button" class="indented btn btn-primary js-head">
+                    Head to Head
+                </button>
+            </div>
+            <div id="Head2HeadResults" class="centered bigTitle indented-top">
+                @*Please pick two players...*@
+                <ul class="nav navbar-nav">
+                    <li class="indented">@(Model.Head1Player.FirstName) @(Model.Head1Player.LastName) (@(Model.Head1Player.HeadToHeads.FirstOrDefault(x => x.OpponentId == Model.Head2Player.PlayerId)?.NumberOfWins))</li>
+                    <li class="indented"><span> Vs. </span></li>
+                    <li class="indented">@(Model.Head2Player.FirstName) @(Model.Head2Player.LastName) (@(Model.Head2Player.HeadToHeads.FirstOrDefault(x => x.OpponentId == Model.Head1Player.PlayerId)?.NumberOfWins))</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div id="Head2HeadResults" class="centered bigTitle indented-top">
-        @*Please pick two players...*@
-        @(Model.Head1Player.FirstName) @(Model.Head1Player.LastName) (@(Model.Head1Player.HeadToHeads.FirstOrDefault(x => x.OpponentId == Model.Head2Player.PlayerId)?.NumberOfWins))
-        Vs.
-        @(Model.Head2Player.FirstName) @(Model.Head2Player.LastName) (@(Model.Head2Player.HeadToHeads.FirstOrDefault(x => x.OpponentId == Model.Head1Player.PlayerId)?.NumberOfWins))
     </div>
 </div>
 <br />
-
-<h1 class="center-text indented-top40">@ViewBag.Title</h1>
-
-<div id="main-logo" class="inline">
-    <img height="500" src="~/Images/atp_masters_logo.png" />
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="indented40">@ViewBag.Title</h1>
+    </div>
 </div>
-@*
-    //todo: make resposive tables with bootstrap!!
-*@
-<div id="playerList" class="inline margin40">
-    @foreach (var player in Model.Players)
-    {
-        string positionClass;
 
-        switch (player.Rank)
-        {
-            case 1:
-                positionClass = "small-size gold";
-                break;
-            case 2:
-                positionClass = "small-size silver";
-                break;
-            case 3:
-                positionClass = "small-size bronze";
-                break;
-            default:
-                positionClass = null;
-                break;
-        }
-        var playerName = @player.FirstName + " " + @player.LastName;
+<div class="row">
+    <div class="col-md-6">
+        <div id="playerList" class="inline margin40">
+            @foreach (var player in Model.Players)
+            {
+                string positionClass;
 
-        var favoritesClass = player.IsFavorite ? "fav-star-image" : string.Empty;
+                switch (player.Rank)
+                {
+                    case 1:
+                        positionClass = "small-size gold";
+                        break;
+                    case 2:
+                        positionClass = "small-size silver";
+                        break;
+                    case 3:
+                        positionClass = "small-size bronze";
+                        break;
+                    default:
+                        positionClass = null;
+                        break;
+                }
+                var playerName = @player.FirstName + " " + @player.LastName;
 
-        <div>
-            <h2 class="inline">
-                @player.Rank. @Html.ActionLink(playerName, "PlayerDetailsByRank", "Player", new { rank = player.Rank }, null)
-            </h2>
-            <div class="inline @positionClass"></div>
-            <div class="inline fav-small @favoritesClass"></div>
+                var favoritesClass = player.IsFavorite ? "fav-star-image" : string.Empty;
+
+                <div>
+                    <h2 class="inline">
+                        @player.Rank. @Html.ActionLink(playerName, "PlayerDetailsByRank", "Player", new { rank = player.Rank }, null)
+                    </h2>
+                    <div class="inline @positionClass"></div>
+                    <div class="inline fav-small @favoritesClass"></div>
+                </div>
+            }
         </div>
-    }
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <img max-height="500" height="500" src="~/Images/atp_masters_logo.png" />
+    </div>
 </div>
 
 @section scripts{
@@ -115,8 +119,8 @@
             $("#head-button").on('click',
                 function () {
                     //alert(document.getElementById('Head1').value);
-                    var head1 = document.getElementById('Head1').value;//$("Head1").val();//document.getElementById('Head2').value
-                    var head2 = document.getElementById('Head2').value;//$("Head2").val();//document.getElementById('Head2').value
+                    var head1 = document.getElementById('Head1').value;
+                    var head2 = document.getElementById('Head2').value;
                     $.ajax({
                         url: '../api/players/headtohead/' + head1 + '/' + head2,
                         method: 'GET',

@@ -30,8 +30,6 @@ namespace ATPTopTen.Controllers
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="sortBy"></param>
-        /// <param name="player1Id">The first playerId for the Head to head info</param>
-        /// <param name="player2Id">The second playerId for the Head to head info</param>
         /// <returns></returns>
         public ActionResult TopTenList(int? pageIndex, string sortBy, string player1Id, string player2Id)
         {
@@ -152,35 +150,6 @@ namespace ATPTopTen.Controllers
             //reload page
             //todo: call this with javascript!!
             return View("PlayerDetailsByRank", playerViewModel);
-        }
-
-        /// <summary>
-        /// Get list of players needed for the Head To Head view
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult _HeadToHead()
-        {
-            //get players (include country too) and sort by Rank (default)
-            var players = dbContext.Players.Include(x => x.Country);
-
-            //create view model
-            var playerListViewModel = new PlayerListViewModel()
-            {
-                Players = new List<Player>()
-            };
-
-            foreach (var player in players)
-            {
-                //eager loading head to heads
-                player.HeadToHeads = dbContext.HeadToHead
-                    .Where(x => x.WinnerId == player.PlayerId);
-
-                //add to list
-                playerListViewModel.Players.Add(player);
-            }
-
-            //return list of viewmodels
-            return View(playerListViewModel);
         }
     }
 }
